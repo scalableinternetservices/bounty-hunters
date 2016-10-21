@@ -1,48 +1,5 @@
 <!DOCTYPE html>
 <HTML>
-    <HEAD>
-        <TITLE> TESTER LANDING PAGE </TITLE>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!-- Bootstrap -->
-    	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet" />
-
-	    <link href='http://fonts.googleapis.com/css?family=Abel|Open+Sans:400,600' rel='stylesheet'>
-	    
-
-    </HEAD>
-    <style>
-
-html { 
-    background: url(http://i.imgur.com/hd0ZmWG.jpg) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
-
-body{
-    padding-top: 20px;
-    font-size: 16px;
-    font-family: "Open Sans", serif;
-    background: transparent;
-}
-
-h1 {
-    font-family: "Abel", Arial, sans-serif;
-    font-weight: 400;
-    font-size: 40px;
-}
-        
-.panel{
-    background-color: rgba(255, 255, 255, 0.9);
-}
-
-.margin-base-vertical {margin: 20px 0;}
-
-    </style>
-
-
     <body>
         <div class="container">
             <div class="row">
@@ -57,22 +14,39 @@ h1 {
                     <p>
                         Sign up and start hunting!
                     </p>
-                    <form class="margin-base-vertical">
-            		    <p class="input-group">
-            			    <span class="input-group-addon"><span class="icon-envelope"></span></span>
-                			<input type="text" class="form-control input-lg" name="email" placeholder="mail@example.com" />
-                		</p>
-                		<p class="help-block text-center"><small>This email will be used to track your earnings.</small></p>
-                		<p class="input-group">
-            			    <span class="input-group-addon"><span class="icon-lock"></span></span>
-                			<input type="text" class="form-control input-lg" name="password" placeholder="**************" />
-                		</p>
-                		<p class="help-block text-center"><small>Remember to make your password secure!</small></p>
-                		<p class="text-center">
-                			<button type="submit" class="btn btn-success btn-lg">Sign Up Now</button>
-                		</p>
-                		</span>
-                	</form>
+                    
+                    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                      <%= devise_error_messages! %>
+
+                      <div class="field">
+                        <%= f.label :email %><br />
+                        <%= f.email_field :email, autofocus: true %>
+                      </div>
+
+                      <div class="field">
+                        <%= f.label :password %>
+                        <% if @minimum_password_length %>
+                        <em>(<%= @minimum_password_length %> characters minimum)</em>
+                        <% end %><br />
+                        <%= f.password_field :password, autocomplete: "off" %>
+                      </div>
+
+                      <div class="field">
+                        <%= f.label :password_confirmation %><br />
+                        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+                      </div>
+
+                      <div class="actions">
+                        <%= f.submit "Sign up" %>
+                      </div>
+                    <% end %>
+
+                    <%= render "devise/shared/links" %>                    
+                    
+                    
+                    
+                    
+                    
                 </div>
             </div>
         </div>
