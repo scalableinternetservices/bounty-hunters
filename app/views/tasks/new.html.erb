@@ -1,0 +1,14 @@
+<h1>Tasks#new</h1>
+<p>Find me in app/views/tasks/new.html.erb</p>
+<%= form_for(@task) do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <br/>
+    <%= f.label :description %>
+    <%= f.text_area :description, :cols => "30", :rows => "5"%>
+    <br/>
+    <%= f.label :bounty_amount%>
+    <%= f.number_field :price %>
+    
+    <%= f.submit "Create a task", class: "btn btn-primary" %>
+<% end %>

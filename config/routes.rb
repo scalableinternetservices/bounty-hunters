@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+
+  
+  get 'tasks/create'
+
+  get 'tasks/new'
+  get 'tasks/show'
+  resources :tasks
+
   devise_for :users, path: 'auth', skip: [:sessions],
   controllers: {
     sessions: 'users/sessions'
@@ -8,10 +16,10 @@ Rails.application.routes.draw do
     post 'auth/sign_in' => 'users/sessions#create', as: :user_session
     delete 'auth/sign_out' => 'users/sessions#destroy', as: :destroy_user_session
   end
-  
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+  get '/mainpage', to: 'pages#mainpage'
 
   # You can have the root of your site routed with "root"
   root 'pages#home'
@@ -28,7 +36,7 @@ Rails.application.routes.draw do
   # Example resource route with options:
   #   resources :products do
   #     member do
-  #       get 'short'
+  #       get 'short'rail
   #       post 'toggle'
   #     end
   #
