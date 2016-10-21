@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
+
+  get 'tasks/create'
+
+  get 'tasks/new'
+  get 'tasks/show'
+  resources :tasks
+
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+  get '/mainpage', to: 'pages#mainpage'
 
   # You can have the root of your site routed with "root"
   root 'pages#home'
@@ -18,7 +26,7 @@ Rails.application.routes.draw do
   # Example resource route with options:
   #   resources :products do
   #     member do
-  #       get 'short'
+  #       get 'short'rail
   #       post 'toggle'
   #     end
   #
