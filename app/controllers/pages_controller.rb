@@ -3,5 +3,6 @@ class PagesController < ApplicationController
     end
     
     def mainpage
+        @tasks = Task.all
     end
 end

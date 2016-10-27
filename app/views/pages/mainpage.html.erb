@@ -3,5 +3,14 @@
         Postings:
     </div>    
     
-    
+    <div>
+    <% @tasks.each do |task| %>
+        <h1>ITEM <%= task.id %></h1>
+        <p>NAME: <%= task.name %></p>
+        <p>DESCRIPTION: <%= task.description %></p>
+        <p>BOUNTY: $<%= task.price %></p>
+    <% end %>
+        
+        
+    </div>
 </div>
