@@ -1,7 +1,16 @@
 <nav class="navbar navbar-default" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">Welcome to Bounty Hunters!</a>
+      <p>Welcome to Bounty Hunters!</p>
+      <p><%= link_to "Home", landing_page_path %></p>
+      <p><%= link_to "Create new task", new_task_path %></p>
+      <p><%= link_to "Application page", main_app_path %></p>
+      <% if current_user %>
+        <p><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></p>
+      <% else %>
+        <p><%= link_to "Log in",  sign_in_path %></p>
+        <p><%= link_to "Sign up",  landing_page_path %></p>
+      <% end %>
     </div>
   </div>
 </nav>

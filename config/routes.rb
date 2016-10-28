@@ -3,19 +3,19 @@ Rails.application.routes.draw do
   
   get 'tasks/create'
 
-  get 'tasks/new'
+  get 'tasks/new', to: "tasks#new", as: "new_task"
   get 'tasks/show'
   resources :tasks
 
-
   devise_for :users, controllers: { sessions: 'users/sessions' }
+  get 'users/sign_in', as: "sign_in"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  get '/mainpage', to: 'pages#mainpage'
+  get '/mainpage', to: 'pages#mainpage', as: "main_app"
 
   # You can have the root of your site routed with "root"
-  root 'pages#home'
+  root 'pages#home', as: "landing_page"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
