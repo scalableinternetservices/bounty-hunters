@@ -1,6 +1,10 @@
 class TasksController < ApplicationController
   def new
+    if current_user
       @task = Task.new
+    else
+      redirect_to new_user_session_path, notice: 'Log in to create a new task.'
+    end
   end
   
   def create
