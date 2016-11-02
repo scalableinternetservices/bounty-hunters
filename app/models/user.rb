@@ -3,5 +3,9 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  #has_many :tasks
+         
+  # when destroyed, destroy all posts
+  has_many :posts, class_name: 'Task', dependent: :destroy
+  # when destroyed, nullify all claimsrai
+  has_many :claims, class_name: 'Task', dependent: :nullify
 end

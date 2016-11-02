@@ -1,10 +1,15 @@
-<h1>Tasks#show</h1>
-<p>Find me in app/views/tasks/show.html.erb</p>
-<h2>The app that we just created should be at the top of this!!!!</h2>
-<% @tasks.each do |task| %>
-    <h1>ITEM <%= task.id %></h1>
-    <p>NAME: <%= task.name %></p>
-    <p>LOCATION: <%= task.location %></p>
-    <p>DESCRIPTION: <%= task.description %></p>
-    <p>BOUNTY: $<%= task.price %></p>
+<h1>TASK <%= @task.id %></h1><br>
+
+<p>NAME: <%= @task.name %></p>
+<p>LOCATION: <%= @task.location %></p>
+<p>DESCRIPTION: <%= @task.description %></p>
+<p>BOUNTY: $<%= @task.price %></p><br>
+<p>TIME CREATED: <%= @task.created_at %></p>
+<p>POSTED BY: <%= @task.owner.email %></p>
+<% unless @task.claimer_id? %>
+    <%= button_to [:claim, @task] do %>
+        <em>CLAIM</em>
+    <% end %>
+<% else %>
+    <p>Task currently claimed!</p>
 <% end %>
