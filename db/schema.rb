@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161028201618) do
+ActiveRecord::Schema.define(version: 20161102071357) do
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
@@ -19,8 +19,12 @@ ActiveRecord::Schema.define(version: 20161028201618) do
     t.decimal  "price"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.string   "location"
+    t.integer  "owner_id"
+    t.integer  "claimer_id"
   end
+
+  add_index "tasks", ["claimer_id"], name: "index_tasks_on_claimer_id"
+  add_index "tasks", ["owner_id"], name: "index_tasks_on_owner_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -35,9 +39,13 @@ ActiveRecord::Schema.define(version: 20161028201618) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.integer  "posts_id"
+    t.integer  "claims_id"
   end
 
+  add_index "users", ["claims_id"], name: "index_users_on_claims_id"
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["posts_id"], name: "index_users_on_posts_id"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end
