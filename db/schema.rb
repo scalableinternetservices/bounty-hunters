@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161102071357) do
+ActiveRecord::Schema.define(version: 20161102090741) do
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20161102071357) do
     t.datetime "updated_at",  null: false
     t.integer  "owner_id"
     t.integer  "claimer_id"
+    t.string   "location"
   end
 
   add_index "tasks", ["claimer_id"], name: "index_tasks_on_claimer_id"

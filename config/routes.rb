@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'tasks/new', to: "tasks#new", as: "new_task"
   get 'tasks/show'
   resources :tasks
+  
+  post 'tasks/:id/claim', to: "tasks#claim", as:"claim_task"
 
   devise_for :users, controllers: { sessions: 'users/sessions' }
   get 'users/sign_in', as: "sign_in"

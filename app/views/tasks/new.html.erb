@@ -17,6 +17,8 @@
     <%= f.label :bounty_amount%>
     <%= f.number_field :price %>
     
+    <%= f.hidden_field :owner_id, value: current_user.id %>
+    
     <%= f.submit "Create a task", class: "btn btn-primary" %>
 <% end %>
 
