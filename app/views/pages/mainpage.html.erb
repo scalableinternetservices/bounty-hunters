@@ -1,29 +1,40 @@
 <div class="container-fluid">
     <div class="row">
         <% if user_signed_in? then %>
-            <p>Welcome back <%= current_user.email %>!</p>
+            <p>Hello <%= current_user.email %>!</p>
         <% end %>
-        Postings:
     </div>    
     
-    <div>
-    <% @tasks.each do |task| %>
-        <h1>ITEM <%= task.id %></h1>
-        <p>NAME: <%= task.name %></p>
-        <p>LOCATION: <%= task.location %></p>
-        <p>DESCRIPTION: <%= task.description %></p>
-        <p>BOUNTY: $<%= task.price %></p>
-        <p>TIME CREATED: <%= task.created_at %></p>
-        <p>POSTED BY: <%= task.owner.email %></p>
-        <% unless task.claimer_id? %>
-            <%= button_to [:claim, task] do %>
-                <em>CLAIM</em>
+    <div class="row">
+        <div class="col-md-6 unclaimed">
+        <div class="col-md-12">
+            <h1>Unclaimed Tasks:</h1>
+        </div>
+        <% @tasks.each do |task| %>
+            <h1>ITEM <%= task.id %></h1>
+            <p>NAME: <%= task.name %></p>
+            <p>LOCATION: <%= task.location %></p>
+            <p>DESCRIPTION: <%= task.description %></p>
+            <p>BOUNTY: $<%= task.price %></p>
+            <p>TIME CREATED: <%= task.created_at %></p>
+            <p>POSTED BY: <%= task.owner.email %></p>
+            <% unless task.claimer_id? %>
+                <%= button_to [:claim, task] do %>
+                    <em>CLAIM</em>
+                <% end %>
+            <% else %>
+                <p>Claimed! [should actually check and hide this]</p>
             <% end %>
-        <% else %>
-            <p>Claimed! [should actually check and hide this]</p>
         <% end %>
-    <% end %>
-        
-        
+        </div>    
+        <div class="col-md-6 claimed">
+            <div class="col-md-12">
+                <h1>Tasks you have claimed:</h1>
+                <% @tasks.each do |task| %>
+                    
+                <% end %>
+            </div>
+            
+        </div>
     </div>
 </div>
