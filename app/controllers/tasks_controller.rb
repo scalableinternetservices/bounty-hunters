@@ -39,6 +39,7 @@ class TasksController < ApplicationController
   
   def claim
     @task = Task.find_by_id(params[:id])
+    current_user.claims << @task
     unless @task.claimer_id?
       @task.claimer_id = current_user.id
       if @task.save

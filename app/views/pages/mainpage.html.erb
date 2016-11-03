@@ -30,11 +30,16 @@
         <div class="col-md-6 claimed">
             <div class="col-md-12">
                 <h1>Tasks you have claimed:</h1>
-                <% @tasks.each do |task| %>
-                    
-                <% end %>
             </div>
-            
+            <% current_user.claims.each do |task| %>
+                <h1>ITEM <%= task.id %></h1>
+                <p>NAME: <%= task.name %></p>
+                <p>LOCATION: <%= task.location %></p>
+                <p>DESCRIPTION: <%= task.description %></p>
+                <p>BOUNTY: $<%= task.price %></p>
+                <p>TIME CREATED: <%= task.created_at %></p>
+                <p>POSTED BY: <%= task.owner.email %></p>
+            <% end %>
         </div>
     </div>
 </div>
