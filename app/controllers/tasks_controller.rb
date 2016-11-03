@@ -39,9 +39,9 @@ class TasksController < ApplicationController
   
   def claim
     @task = Task.find_by_id(params[:id])
-    current_user.claims << @task
     unless @task.claimer_id?
-      @task.claimer_id = current_user.id
+      current_user.claims << @task
+      # @task.claimer_id = current_user.id
       if @task.save
         redirect_to @task, alert: "Successfully claimed task!"
       else
@@ -50,6 +50,12 @@ class TasksController < ApplicationController
     else
       redirect_to main_app, alert: "Error: task already claimed!"
     end
+  end
+  
+  def cancel
+    Task.update(params[:id], :claimer_id=>nil)
+    # current_user.claims.delete(@task)
+    redirect_to :back
   end
   
   private

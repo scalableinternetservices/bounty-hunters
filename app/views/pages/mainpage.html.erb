@@ -39,6 +39,9 @@
                 <p>BOUNTY: $<%= task.price %></p>
                 <p>TIME CREATED: <%= task.created_at %></p>
                 <p>POSTED BY: <%= task.owner.email %></p>
+                <%= button_to [:cancel, task], :method => :put  do %>
+                    <em>cancel</em>
+                <% end %>
             <% end %>
         </div>
     </div>
