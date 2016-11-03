@@ -41,9 +41,8 @@ class TasksController < ApplicationController
     @task = Task.find_by_id(params[:id])
     unless @task.claimer_id?
       current_user.claims << @task
-      # @task.claimer_id = current_user.id
       if @task.save
-        redirect_to @task, alert: "Successfully claimed task!"
+        redirect_to :back, alert: "Successfully claimed task!"
       else
         redirect_to main_app, alert: "Error saving claim."
       end
@@ -54,8 +53,7 @@ class TasksController < ApplicationController
   
   def cancel
     Task.update(params[:id], :claimer_id=>nil)
-    # current_user.claims.delete(@task)
-    redirect_to :back
+    redirect_to :back, alert: "Successfully canceled task!"
   end
   
   private
