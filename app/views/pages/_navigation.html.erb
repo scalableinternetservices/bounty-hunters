@@ -1,7 +1,12 @@
 <nav class="navbar navbar-default" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <p>Welcome to Bounty Hunters!</p>
+      <% if user_signed_in? then %>
+        <p>Welcome back <%= current_user.email %>!</p>
+        <p>Your account balance is $<%= current_user.amount %></p>
+      <% else %>
+        <p>Welcome to Bounty Hunters!</p>
+      <% end %>
       <p><%= link_to "Home", landing_page_path %></p>
       <p><%= link_to "Create new task", new_task_path %></p>
       <p><%= link_to "Application page", main_app_path %></p>
