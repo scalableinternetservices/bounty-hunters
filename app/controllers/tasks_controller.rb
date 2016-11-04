@@ -30,10 +30,15 @@ class TasksController < ApplicationController
   end
   
   def destroy
-    if @task.destroy
-      redirect_to main_app, alert: "Task destroyed successfully."
+    @task = Task.find_by_id(params[:id])
+    if current_user.posts.include? @task
+      if @task.destroy
+        redirect_to main_app_path, alert: "Task successfully destroyed."
+      else
+        redirect_to @task, alert: "Error destroying task."
+      end
     else
-      redirect_to main_app, alert: "Error destroying task."
+      redirect_to @task, alert: "Could not destroy task."
     end
   end
   
@@ -48,6 +53,17 @@ class TasksController < ApplicationController
       end
     else
       redirect_to main_app, alert: "Error: task already claimed!"
+    end
+  end
+  
+  def complete
+    @task = Task.find_by_id(params[:id])
+    if current_user.claims.include? @task
+      if @task.destroy
+        redirect_to main_app_path, alert: "Task successfully completed."
+      else
+        redirect_to @task, alert: "Error completing task."
+      end
     end
   end
   

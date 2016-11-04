@@ -1,9 +1,4 @@
-<div class="container-fluid">
-    <div class="row">
-        <% if user_signed_in? then %>
-            <p>Hello <%= current_user.email %>!</p>
-        <% end %>
-    </div>    
+<div class="container-fluid">  
     
     <div class="row">
         <div class="col-md-6 unclaimed">
@@ -20,7 +15,12 @@
                 <p>TIME CREATED: <%= task.created_at %></p>
                 <p>POSTED BY: <%= task.owner.email %></p>
                 <%= button_to [:claim, task] do %>
-                    <em>CLAIM</em>
+                    <em>Claim</em>
+                <% end %>
+                <% if current_user.posts.include? task %>
+                    <%= button_to [:destroy, task] do %>
+                        <strong>Delete</strong>
+                    <% end %>
                 <% end %>
             <% end %>
         <% end %>
@@ -38,7 +38,10 @@
                 <p>TIME CREATED: <%= task.created_at %></p>
                 <p>POSTED BY: <%= task.owner.email %></p>
                 <%= button_to [:cancel, task], :method => :put  do %>
-                    <em>cancel</em>
+                    <em>Cancel</em>
+                <% end %>
+                <%= button_to [:complete, task] do %>
+                    <strong>Complete!</strong>
                 <% end %>
             <% end %>
         </div>
