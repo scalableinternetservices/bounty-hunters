@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   
   post 'tasks/:id/claim', to: "tasks#claim", as:"claim_task"
   put 'tasks/:id/cancel', to: "tasks#cancel", as:"cancel_task"
+  post 'tasks/:id/complete', to: "tasks#complete", as:"complete_task"
+  post 'tasks/:id/destroy', to: "tasks#destroy", as:"destroy_task"
 
   devise_for :users, controllers: { sessions: 'users/sessions' }
   get 'users/sign_in', as: "sign_in"
