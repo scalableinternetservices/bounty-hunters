@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20161104181825) do
     t.decimal  "price"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    #t.integer  "owner_id"
-    #t.integer  "claimer_id"
+    t.integer  "owner_id"
+    t.integer  "claimer_id"
     t.string   "location"
   end
 
@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(version: 20161104181825) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    #t.integer  "posts_id"
-    #t.integer  "claims_id"
+    t.integer  "posts_id"
+    t.integer  "claims_id"
     t.integer  "amount",                 default: 0
   end
 
