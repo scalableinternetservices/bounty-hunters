@@ -6,10 +6,9 @@
 <p>BOUNTY: $<%= @task.price %></p><br>
 <p>TIME CREATED: <%= @task.created_at %></p>
 <p>POSTED BY: <%= @task.owner.email %></p>
-<% unless @task.claimer_id? %>
-    <%= button_to [:claim, @task] do %>
-        <em>CLAIM</em>
+
+<% if current_user.posts.include? @task %>
+    <%= button_to [:destroy, @task] do %>
+        <strong>Delete</strong>
     <% end %>
-<% else %>
-    <p>Task currently claimed!</p>
 <% end %>

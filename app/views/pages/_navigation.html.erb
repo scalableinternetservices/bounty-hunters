@@ -3,6 +3,7 @@
     <div class="navbar-header">
       <% if user_signed_in? then %>
         <p>Welcome back <%= current_user.email %>!</p>
+        <p>Your account balance is $<%= current_user.amount %></p>
       <% else %>
         <p>Welcome to Bounty Hunters!</p>
       <% end %>

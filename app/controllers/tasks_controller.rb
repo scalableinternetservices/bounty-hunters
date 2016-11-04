@@ -59,7 +59,9 @@ class TasksController < ApplicationController
   def complete
     @task = Task.find_by_id(params[:id])
     if current_user.claims.include? @task
+      price = @task.price + current_user.amount
       if @task.destroy
+        current_user.update_attribute(:amount, price)
         redirect_to main_app_path, alert: "Task successfully completed."
       else
         redirect_to @task, alert: "Error completing task."
