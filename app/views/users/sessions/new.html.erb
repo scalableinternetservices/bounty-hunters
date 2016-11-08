@@ -1,26 +1,41 @@
-<h2>Log in</h2>
+<div class="landing_page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 panel panel-default"> 
+        <h1>THE HUNT CONTINUES</h1>
+            
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {:class => "form-horizontal center"}) do |f| %>
+          <%= devise_error_messages! %>
+          <div class="form-group">
+            <%= f.label :email, class: "col-sm-4 control-label" %>
+            <div class="col-sm-8">
+              <%= f.email_field :email, autofocus: true, class: "form-control" %>
+            </div>
+          </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+          <div class="form-group">
+            <%= f.label :password, class: "col-sm-4 control-label" %>
+            <div class="col-sm-8">
+              <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+            </div>
+          </div>
+          
+          <% if devise_mapping.rememberable? -%>
+            <div class="check_box col-sm-offset-4 col-sm-8">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %><br>
+            </div>
+          <% end -%>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+          <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+              <%= f.submit "Log in", class: "btn btn-default" %>
+            </div>
+          </div>
+        <% end %>
 
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+        <!--<%= render "devise/shared/links" %>  -->
+      </div>
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+  </div>                    
+</div>
