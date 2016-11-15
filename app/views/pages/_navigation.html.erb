@@ -1,16 +1,33 @@
-<nav class="navbar navbar-default" role="navigation">
-  <div class="container">
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
     <div class="navbar-header">
-      <p>Welcome to Bounty Hunters!</p>
-      <p><%= link_to "Home", landing_page_path %></p>
-      <p><%= link_to "Create new task", new_task_path %></p>
-      <p><%= link_to "Application page", main_app_path %></p>
-      <% if current_user %>
-        <p><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></p>
+      <% if user_signed_in? then %>
+        <%= link_to "BOUNTY", main_app_path, { :class=>"navbar-brand" } %>
       <% else %>
-        <p><%= link_to "Log in",  sign_in_path %></p>
-        <p><%= link_to "Sign up",  landing_page_path %></p>
+        <%= link_to "BOUNTY", landing_page_path, { :class=>"navbar-brand" } %>
       <% end %>
     </div>
+    
+    <% if user_signed_in? then %>
+      <ul class="nav navbar-nav">
+        <li><%= link_to "Post a task", new_task_path %></li>
+        <li><%= link_to "View all tasks", main_app_path %></li>
+      </ul>
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+      </ul>
+      <p class="nav navbar-text navbar-right">Welcome back <%= current_user.email %>!</p>
+      <p class="nav navbar-text navbar-right">Balance $<%= current_user.amount %>.</p>
+    <% else %>
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "Log in",  sign_in_path %></li>
+        <li><%= link_to "Sign up",  landing_page_path %></li>
+      </ul>
+    <% end %>
+    
+    <em class="nav navbar-text navbar-left"><%= notice %></em>
+    <em class="nav navbar-text navbar-left"><%= alert %></em>
+      
   </div>
 </nav>
