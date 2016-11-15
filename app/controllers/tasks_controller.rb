@@ -9,11 +9,11 @@ class TasksController < ApplicationController
   
   def create
 
+    #link up the user and the tasks
+    @task = current_user.posts.create(task_params)
     #split the comma-separated input
     @task.tags = params[:task][:tags].split(',')
     
-    #link up the user and the tasks
-    @task = current_user.posts.create(task_params)
     if @task.save
         redirect_to @task, alert: "Task created successfully."
     else
