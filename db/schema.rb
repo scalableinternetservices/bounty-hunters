@@ -22,9 +22,10 @@ ActiveRecord::Schema.define(version: 20161115203653) do
     t.datetime "updated_at",                       null: false
     t.integer  "owner_id"
     t.integer  "claimer_id"
+    t.string   "address"
+    t.string   "tags",        default: "--- []\n"
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "tags",        default: "--- []\n"
   end
 
   add_index "tasks", ["claimer_id"], name: "index_tasks_on_claimer_id"

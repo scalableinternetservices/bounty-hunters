@@ -8,7 +8,7 @@ class TasksController < ApplicationController
   end
   
   def create
-
+    
     #link up the user and the tasks
     @task = current_user.posts.create(task_params)
     #split the comma-separated input
