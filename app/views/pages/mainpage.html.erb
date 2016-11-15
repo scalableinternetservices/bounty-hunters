@@ -39,7 +39,7 @@
             <% current_user.claims.each do |task| %>
                 <h1>ITEM <%= task.id %></h1>
                 <p>NAME: <%= task.name %></p>
-                <p>LOCATION: <%= task.location %></p>
+                <p>LOCATION: <%= task.address %></p>
                 <p>DESCRIPTION: <%= task.description %></p>
                 <p>BOUNTY: $<%= task.price %></p>
                 <p>TAGs: 
