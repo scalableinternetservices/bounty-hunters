@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# Geocoding
+gem 'geocoder'
 
 # Integrate Bootstrap
 gem 'bootstrap-sass', '~> 3.2.0'
