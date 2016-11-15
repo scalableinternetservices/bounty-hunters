@@ -63,6 +63,7 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.7.0)
+    geocoder (1.4.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     gmaps4rails (2.1.2)
@@ -169,7 +170,11 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise
+<<<<<<< HEAD
   gmaps4rails
+=======
+  geocoder
+>>>>>>> df8f7aacf4bc584f35446ce7a4b7193b378580a4
   jbuilder (~> 2.0)
   jquery-rails
   rails (= 4.2.5)

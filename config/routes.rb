@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   
   get 'tasks/create'
-
+  get 'tasks/map', to: "tasks#map", as: "map_task"
   get 'tasks/new', to: "tasks#new", as: "new_task"
   get 'tasks/show'
   resources :tasks
@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   put 'tasks/:id/cancel', to: "tasks#cancel", as:"cancel_task"
   post 'tasks/:id/complete', to: "tasks#complete", as:"complete_task"
   post 'tasks/:id/destroy', to: "tasks#destroy", as:"destroy_task"
-
+  
+  
   devise_for :users, controllers: { sessions: 'users/sessions' }
   get 'users/sign_in', as: "sign_in"
 
