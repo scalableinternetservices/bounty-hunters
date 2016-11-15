@@ -43,4 +43,23 @@
             <% end %>
         </div>
     </div>
+    <div class="row">
+        <div style='width: 800px; display: block; margin:auto; margin-top: 100px'>
+          <div id="map" style='width: 1200px; height: 600px;'></div>
+        </div>
+    </div>
+    <script>
+        handler = Gmaps.build('Google');
+        handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+          markers = handler.addMarkers([
+            {
+              "lat": -34.397,
+              "lng": 150.644,
+              "infowindow": "hello!"
+            }
+          ]);
+          handler.bounds.extendWith(markers);
+          handler.fitMapToBounds();
+        });
+    </script>
 </div>
