@@ -1,5 +1,5 @@
 <div class="container-fluid">  
-
+    
     <div class="row">
         <div class="col-md-6 unclaimed">
         <div class="col-md-12">
@@ -9,13 +9,16 @@
             <% unless task.claimer_id? %>
                 <h1>ITEM <%= task.id %></h1>
                 <p>NAME: <%= task.name %></p>
-                <p>LOCATION: <%= task.address %></p>
+                <p>LOCATION: <%= task.location %></p>
                 <p>DESCRIPTION: <%= task.description %></p>
                 <p>BOUNTY: $<%= task.price %></p>
+                <p>TAGs: 
+                    <% task.tags.each do |tag| %>
+                      <li><%= tag %></li>
+                    <% end %>
+                </p>
                 <p>TIME CREATED: <%= task.created_at %></p>
                 <p>POSTED BY: <%= task.owner.email %></p>
-                <p>Lat: <%= task.latitude %></p>
-                <p>Long: <%= task.longitude %></p>
                 <%= button_to [:claim, task] do %>
                     <em>Claim</em>
                 <% end %>
@@ -37,6 +40,11 @@
                 <p>LOCATION: <%= task.location %></p>
                 <p>DESCRIPTION: <%= task.description %></p>
                 <p>BOUNTY: $<%= task.price %></p>
+                <p>TAGs: 
+                    <% task.tags.each do |tag| %>
+                      <li><%= tag %></li>
+                    <% end %>
+                </p>
                 <p>TIME CREATED: <%= task.created_at %></p>
                 <p>POSTED BY: <%= task.owner.email %></p>
                 <%= button_to [:cancel, task], :method => :put  do %>
@@ -48,34 +56,4 @@
             <% end %>
         </div>
     </div>
-    <div class="row">
-        <div style='width: 800px; display: block; margin:auto; margin-top: 100px'>
-          <div id="map" style='width: 1200px; height: 600px;'></div>
-        </div>
-    </div>
-    
-    <%= location_info = request.location %><br>
-
-    <%= lat = location_info.latitude %><br>
-    <%= long = location_info.longitude %><br>
-    
-    <script>
-        handler = Gmaps.build('Google');
-        handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
-          markers = handler.addMarkers([
-            {
-              "lat": <%= lat %>,
-              "lng": <%= long %>,
-              "infowindow": "hello!"
-            }
-          ]);
-          handler.bounds.extendWith(markers);
-          handler.fitMapToBounds();
-            
-          <% @tasks.each do |task| %>
-              handler.addMarker({"lat": <%= task.latitude %>, "lng": <%= task.longitude %>, "infowindow": "Hi!"})
-          <% end %>
-
-        });
-    </script>
 </div>

@@ -9,6 +9,9 @@ class TasksController < ApplicationController
   
   def create
 
+    #split the comma-separated input
+    @task.tags = params[:task][:tags].split(',')
+    
     #link up the user and the tasks
     @task = current_user.posts.create(task_params)
     if @task.save
@@ -77,6 +80,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:name, :address, :description, :price, :owner_id, :claimer_id)
+    params.require(:task).permit(:name, :address, :description, :price, :tags, :owner_id, :claimer_id)
   end
 end
