@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20161115203653) do
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
+    t.string   "address"
     t.text     "description"
     t.decimal  "price"
     t.datetime "created_at",                       null: false
