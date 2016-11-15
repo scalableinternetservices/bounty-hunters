@@ -5,6 +5,11 @@
 <p>DESCRIPTION: <%= @task.description %></p>
 <p>BOUNTY: $<%= @task.price %></p><br>
 <p>TIME CREATED: <%= @task.created_at %></p>
+<p>TAGs: 
+    <% @task.tags.each do |tag| %>
+      <li><%= tag %></li>
+    <% end %>
+</p>
 <p>POSTED BY: <%= @task.owner.email %></p>
 
 <% if current_user.posts.include? @task %>

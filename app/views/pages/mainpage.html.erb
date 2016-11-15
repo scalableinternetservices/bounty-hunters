@@ -1,5 +1,5 @@
 <div class="container-fluid">  
-
+    
     <div class="row">
         <div class="col-md-6 unclaimed">
         <div class="col-md-12">
@@ -12,6 +12,11 @@
                 <p>LOCATION: <%= task.address %></p>
                 <p>DESCRIPTION: <%= task.description %></p>
                 <p>BOUNTY: $<%= task.price %></p>
+                <p>TAGs: 
+                    <% task.tags.each do |tag| %>
+                      <li><%= tag %></li>
+                    <% end %>
+                </p>
                 <p>TIME CREATED: <%= task.created_at %></p>
                 <p>POSTED BY: <%= task.owner.email %></p>
                 <p>Lat: <%= task.latitude %></p>
@@ -37,6 +42,11 @@
                 <p>LOCATION: <%= task.location %></p>
                 <p>DESCRIPTION: <%= task.description %></p>
                 <p>BOUNTY: $<%= task.price %></p>
+                <p>TAGs: 
+                    <% task.tags.each do |tag| %>
+                      <li><%= tag %></li>
+                    <% end %>
+                </p>
                 <p>TIME CREATED: <%= task.created_at %></p>
                 <p>POSTED BY: <%= task.owner.email %></p>
                 <%= button_to [:cancel, task], :method => :put  do %>
