@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161104181825) do
+ActiveRecord::Schema.define(version: 20161114225928) do
+
+  create_table "locations", force: :cascade do |t|
+    t.string  "name"
+    t.text    "address"
+    t.float   "latitude"
+    t.float   "longitude"
+    t.integer "task_id"
+  end
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
@@ -19,9 +27,11 @@ ActiveRecord::Schema.define(version: 20161104181825) do
     t.decimal  "price"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "location"
     t.integer  "owner_id"
     t.integer  "claimer_id"
-    t.string   "location"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "tasks", ["claimer_id"], name: "index_tasks_on_claimer_id"
