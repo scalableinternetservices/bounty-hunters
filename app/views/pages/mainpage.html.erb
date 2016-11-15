@@ -76,14 +76,14 @@
             {
               "lat": <%= lat %>,
               "lng": <%= long %>,
-              "infowindow": "hello!"
+              "infowindow": "This is where you are!"
             }
           ]);
           handler.bounds.extendWith(markers);
           handler.fitMapToBounds();
             
           <% @tasks.each do |task| %>
-              handler.addMarker({"lat": <%= task.latitude %>, "lng": <%= task.longitude %>, "infowindow": "Hi!"})
+              handler.addMarker({"lat": <%= task.latitude %>, "lng": <%= task.longitude %>, "infowindow": "Hi!" })
           <% end %>
 
         });
