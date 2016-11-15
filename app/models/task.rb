@@ -9,6 +9,6 @@ class Task < ActiveRecord::Base
     
     # unsure of gmaps api if we ever add but something like this
     #has_one :location, class_name: 'Address'
-    geocoded_by :location
+    geocoded_by :address
     after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
 end

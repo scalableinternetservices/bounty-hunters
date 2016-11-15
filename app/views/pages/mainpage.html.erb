@@ -1,5 +1,4 @@
 <div class="container-fluid">  
-    <li><%= link_to "View on map.", map_task_path %></li>
 
     <div class="row">
         <div class="col-md-6 unclaimed">
@@ -10,11 +9,13 @@
             <% unless task.claimer_id? %>
                 <h1>ITEM <%= task.id %></h1>
                 <p>NAME: <%= task.name %></p>
-                <p>LOCATION: <%= task.location %></p>
+                <p>LOCATION: <%= task.address %></p>
                 <p>DESCRIPTION: <%= task.description %></p>
                 <p>BOUNTY: $<%= task.price %></p>
                 <p>TIME CREATED: <%= task.created_at %></p>
                 <p>POSTED BY: <%= task.owner.email %></p>
+                <p>Lat: <%= task.latitude %></p>
+                <p>Long: <%= task.longitude %></p>
                 <%= button_to [:claim, task] do %>
                     <em>Claim</em>
                 <% end %>
@@ -52,18 +53,29 @@
           <div id="map" style='width: 1200px; height: 600px;'></div>
         </div>
     </div>
+    
+    <%= location_info = request.location %><br>
+
+    <%= lat = location_info.latitude %><br>
+    <%= long = location_info.longitude %><br>
+    
     <script>
         handler = Gmaps.build('Google');
         handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
           markers = handler.addMarkers([
             {
-              "lat": -34.397,
-              "lng": 150.644,
+              "lat": <%= lat %>,
+              "lng": <%= long %>,
               "infowindow": "hello!"
             }
           ]);
           handler.bounds.extendWith(markers);
           handler.fitMapToBounds();
+            
+          <% @tasks.each do |task| %>
+              handler.addMarker({"lat": <%= task.latitude %>, "lng": <%= task.longitude %>, "infowindow": "Hi!"})
+          <% end %>
+
         });
     </script>
 </div>
