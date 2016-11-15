@@ -16,6 +16,9 @@
     <br/>
     <%= f.label :bounty_amount%>
     <%= f.number_field :price %>
+    <br/>
+    <%= f.label :tags %>
+    <%= f.text_field :tags, multiple: true %>
     
     <%= f.hidden_field :owner_id, value: current_user.id %>
     
