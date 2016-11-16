@@ -15,10 +15,9 @@
                         <% unless task.claimer_id? %>
                             <div class="panel panel-default">
                                   <div class="panel-heading">
-                                        <h2>ITEM <%= task.id %></h2j>
+                                        <h2><%= task.name %></h2>
                                   </div>
                                   <div class="panel-body">
-                                        <p>NAME: <%= task.name %></p>
                                         <p>LOCATION: <%= task.address %></p>
                                         <p>DESCRIPTION: <%= task.description %></p>
                                         <p>BOUNTY: $<%= task.price %></p>
@@ -56,10 +55,9 @@
                     <% current_user.claims.each do |task| %>
                         <div class="panel panel-default">
                              <div class="panel-heading">
-                                <h1>ITEM <%= task.id %></h1>
+                                <h1><%= task.name %></h1>
                             </div>
                             <div class="panel-body">
-                                <p>NAME: <%= task.name %></p>
                                 <p>LOCATION: <%= task.address %></p>
                                 <p>DESCRIPTION: <%= task.description %></p>
                                 <p>BOUNTY: $<%= task.price %></p>
