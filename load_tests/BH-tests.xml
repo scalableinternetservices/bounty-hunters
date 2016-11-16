@@ -6,8 +6,8 @@
         <client host="localhost" use_controller_vm="true" maxusers='15000'/>
     </clients>
     
+    <!-- SERVER IP TO BE DETERMINED (when we create the ec2 instance) -->
     <servers>
-        <!-- SERVER IP TO BE DETERMINED -->
         <server host="www.google.com" port="80" type="tcp"/>
     </servers>
     
@@ -42,6 +42,112 @@
             <request>
                 <http url="/" version="1.1" method="GET"/>
             </request>
+            
+            
+             <!-- wait for up to 2 seconds, user is going to sign up -->
+            <thinktime value="2" random="true"></thinktime>
+            
+            <!-- Make a random number to set as a user name-->
+            <setdynvars sourcetype="random_number" start="1000" end="9999999">
+                <var name="random_user_name" />
+            </setdynvars>
+            
+            <!-- Make a random number to set as a user password-->
+            <setdynvars sourcetype="random_number" start="1000" end="9999999">
+                <var name="random_user_password" />
+            </setdynvars>
+            
+            <!-- Make a random number to set as a task name -->
+            <!--<setdynvars sourcetype="random_number" start="1000" end="9999999">-->
+            <!--    <var name="random_task_name" />-->
+            <!--</setdynvars>-->
+            
+            
+            <!-- User Sign up -->
+            <request subst="true">
+                <http
+                    url='/users'
+                    version='1.1'
+                    method='POST'          
+                    contents='user%5Bemail%5D=test_%%random_user_name%%%40gmail.com
+                    &amp;user%5Bpassword%5D=pass_%%random_user_password%%
+                    &amp;user%5Bpassword_confirmation%5D=pass_%%random_user_password%%
+                    &amp;commit=Sign+up'>
+                </http>
+            </request>
+            
+            <!--go to main page-->
+            <request>
+                <http url="/mainpage" version="1.1" method="GET"/>
+            </request>
+            
+            <!-- wait for up to 2 seconds, user will create a task -->
+            <thinktime value="2" random="true"></thinktime>
+            
+            <!-- Creating a task WHAT SHOULD WE INPUT??-->
+            <request subst="true">
+                <http
+                    url='/tasks'
+                    version='1.1'
+                    method='POST'
+                
+                    contents='task%5Bname%5D=Testing+again
+                    &amp;task%5Baddress%5D=Santa+Monica%2C+CA
+                    &amp;task%5Bdescription%5D=123213
+                    &amp;task%5Bprice%5D=12312
+                    &amp;task%5Btags%5D%5B%5D=123
+                    &amp;task%5Bowner_id%5D=2
+                    &amp;commit=Create+a+task'>
+                </http>
+            </request>
+            
+            <!-- wait for up to 2 seconds, user will create a task -->
+            <thinktime value="2" random="true"></thinktime>
+            
+            
+            <!-- confused about this part... NEED HELP!!! -->
+            <!-- how to order these posts / puts without any data -->
+            
+            <!-- Claiming a task, can only claim 1 task at a time?  -->
+            <request subst="true">
+                <http
+                    url='tasks/1/claim'
+                    version='1.1'
+                    method='PUT'>
+                </http>
+            </request>
+            
+            <!-- Canceling a task, can only cancel 1 task at a time?  -->
+            <request subst="true">
+                <http
+                    url='tasks/1/cancel'
+                    version='1.1'
+                    method='PUT'>
+                </http>
+            </request>
+            
+            <!-- Deleting a task, can only cancel 1 task at a time?  -->
+            <request subst="true">
+                <http
+                    url='tasks/1/destroy'
+                    version='1.1'
+                    method='POST'>
+                </http>
+            </request>
+            
+            <!-- completing a task, can only cancel 1 task at a time?  -->
+            <request subst="true">
+                <http
+                    url='tasks/1/complete'
+                    version='1.1'
+                    method='POST'>
+                </http>
+            </request>
+            
+            
+            
+            
+            
         </session>
     </sessions>
     
