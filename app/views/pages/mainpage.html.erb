@@ -2,52 +2,82 @@
     
     <div class="row">
         <div class="col-md-6 unclaimed">
-        <div class="col-md-12">
-            <h1>Unclaimed Tasks:</h1>
-        </div>
-        <% @tasks.each do |task| %>
-            <% unless task.claimer_id? %>
-                <h1><%= task.name %></h1>
-                <p>LOCATION: <%= task.address %></p>
-                <p>DESCRIPTION: <%= task.description %></p>
-                <p>BOUNTY: $<%= task.price %></p>
-                <p>TAGS: 
-                    <%= task.tags.join ' ' %> 
-                </p>
-                <p>TIME CREATED: <%= task.created_at %></p>
-                <p>POSTED BY: <%= task.owner.email %></p>
-                <%= button_to [:claim, task] do %>
-                    <em>Claim</em>
-                <% end %>
-                <% if current_user.posts.include? task %>
-                    <%= button_to [:destroy, task] do %>
-                        <strong>Delete</strong>
+            
+            <div class="col-md-12">
+                <h1>Unclaimed Tasks:</h1>
+            </div>
+            <p></p>
+        
+        
+            <div class="col-md-12 uctasks">
+                <div class="panel-group">
+                    <% @tasks.each do |task| %>
+                        <% unless task.claimer_id? %>
+                            <div class="panel panel-default">
+                                  <div class="panel-heading">
+                                        <h2><%= task.name %></h2>
+                                  </div>
+                                  <div class="panel-body">
+                                        <p>LOCATION: <%= task.address %></p>
+                                        <p>DESCRIPTION: <%= task.description %></p>
+                                        <p>BOUNTY: $<%= task.price %></p>
+                                        <p>TAGS: 
+                                            <%= task.tags.join ' ' %> 
+                                        </p>
+                                        <p>TIME CREATED: <%= task.created_at %></p>
+                                        <p>POSTED BY: <%= task.owner.email %></p>
+                                        <p>Lat: <%= task.latitude %></p>
+                                        <p>Long: <%= task.longitude %></p>
+                                        <%= button_to [:claim, task] do %>
+                                            <em>Claim</em>
+                                        <% end %>
+                                        <% if current_user.posts.include? task %>
+                                            <%= button_to [:destroy, task] do %>
+                                                <strong>Delete</strong>
+                                            <% end %>
+                                        <% end %>
+                                    </div>
+                                </div>
+                        <% end %>
                     <% end %>
-                <% end %>
-            <% end %>
-        <% end %>
-        </div>    
+                </div>
+            </div>
+        
         <div class="col-md-6 claimed">
             <div class="col-md-12">
                 <h1>Tasks you have claimed:</h1>
             </div>
-            <% current_user.claims.each do |task| %>
-                <h1><%= task.name %></h1>
-                <p>LOCATION: <%= task.address %></p>
-                <p>DESCRIPTION: <%= task.description %></p>
-                <p>BOUNTY: $<%= task.price %></p>
-                <p>TAGS: 
-                    <%= task.tags.join ' ' %> 
-                </p>
-                <p>TIME CREATED: <%= task.created_at %></p>
-                <p>POSTED BY: <%= task.owner.email %></p>
-                <%= button_to [:cancel, task], :method => :put  do %>
-                    <em>Cancel</em>
-                <% end %>
-                <%= button_to [:complete, task] do %>
-                    <strong>Complete!</strong>
-                <% end %>
-            <% end %>
+                        <p></p>
+
+            <div class="col-md-12 ctasks">
+                <div class="panel-group">
+                
+                    <% current_user.claims.each do |task| %>
+                        <div class="panel panel-default">
+                             <div class="panel-heading">
+                                <h1><%= task.name %></h1>
+                            </div>
+                            <div class="panel-body">
+                                <p>LOCATION: <%= task.address %></p>
+                                <p>DESCRIPTION: <%= task.description %></p>
+                                <p>BOUNTY: $<%= task.price %></p>
+                                <p>TAGS: 
+                                    <%= task.tags.join ' ' %> 
+                                </p>
+                                <p>TIME CREATED: <%= task.created_at %></p>
+                                <p>POSTED BY: <%= task.owner.email %></p>
+                                <%= button_to [:cancel, task], :method => :put  do %>
+                                    <em>Cancel</em>
+                                <% end %>
+                                <%= button_to [:complete, task] do %>
+                                    <strong>Complete!</strong>
+                                <% end %>
+                            </div>
+                        </div>
+                    <% end %>
+                    
+                </div>
+            </div>
         </div>
     </div>
     <div class="container container-table">
