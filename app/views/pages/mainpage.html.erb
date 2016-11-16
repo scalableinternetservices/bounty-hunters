@@ -7,8 +7,7 @@
         </div>
         <% @tasks.each do |task| %>
             <% unless task.claimer_id? %>
-                <h1>ITEM <%= task.id %></h1>
-                <p>NAME: <%= task.name %></p>
+                <h1><%= task.name %></h1>
                 <p>LOCATION: <%= task.address %></p>
                 <p>DESCRIPTION: <%= task.description %></p>
                 <p>BOUNTY: $<%= task.price %></p>
@@ -17,8 +16,6 @@
                 </p>
                 <p>TIME CREATED: <%= task.created_at %></p>
                 <p>POSTED BY: <%= task.owner.email %></p>
-                <p>Lat: <%= task.latitude %></p>
-                <p>Long: <%= task.longitude %></p>
                 <%= button_to [:claim, task] do %>
                     <em>Claim</em>
                 <% end %>
@@ -35,8 +32,7 @@
                 <h1>Tasks you have claimed:</h1>
             </div>
             <% current_user.claims.each do |task| %>
-                <h1>ITEM <%= task.id %></h1>
-                <p>NAME: <%= task.name %></p>
+                <h1><%= task.name %></h1>
                 <p>LOCATION: <%= task.address %></p>
                 <p>DESCRIPTION: <%= task.description %></p>
                 <p>BOUNTY: $<%= task.price %></p>
