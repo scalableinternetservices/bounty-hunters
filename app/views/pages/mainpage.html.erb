@@ -40,10 +40,8 @@
                 <p>LOCATION: <%= task.address %></p>
                 <p>DESCRIPTION: <%= task.description %></p>
                 <p>BOUNTY: $<%= task.price %></p>
-                <p>TAGs: 
-                    <% task.tags.each do |tag| %>
-                      <li><% puts.tag %></li>
-                    <% end %>
+                <p>TAGS: 
+                    <%= task.tags.join ' ' %> 
                 </p>
                 <p>TIME CREATED: <%= task.created_at %></p>
                 <p>POSTED BY: <%= task.owner.email %></p>
@@ -81,7 +79,7 @@
           ]);
             
           <% @tasks.each do |task| %>
-              handler.addMarker({"lat": <%= task.latitude %>, "lng": <%= task.longitude %>, "infowindow": "Hi!" })
+              handler.addMarker({"lat": <%= task.latitude %>, "lng": <%= task.longitude %>, "infowindow": "<%= task.name %>" })
           <% end %>
           handler.bounds.extendWith(markers);
           handler.fitMapToBounds();
