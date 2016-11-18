@@ -3,7 +3,12 @@
     <!-- THE CURRENT USER ID IS <%= current_user.id %> -->
 
     <div class="row">
-        <div class="col-md-6 unclaimed">
+
+    
+    <section class="task-panel panel-bg">
+        <div class="container">
+            <div class="col-md-6 unclaimed">
+                
             
             <div class="col-md-12">
                 <h1>Unclaimed Tasks:</h1>
@@ -37,13 +42,14 @@
                                             <%= button_to [:destroy, task] do  %>
                                                 <button class="btn btn-warning">Delete</button>
                                             <% end %>
-                                        <% end %>
+                                        </div>
                                     </div>
-                                </div>
+                            <% end %>
                         <% end %>
-                    <% end %>
+                    </div>
                 </div>
             </div>
+
         </div>
         <div class="col-md-6 claimed">
             <div class="col-md-12">
@@ -55,7 +61,7 @@
                 <div class="panel-group">
                 
                     <% current_user.claims.each do |task| %>
-                        <!-- THE ID FOR THIS CLAIMED TASK IS <%= task.id %> -->
+                            <!-- THE ID FOR THIS CLAIMED TASK IS <%= task.id %> -->
 
                         <div class="panel panel-primary">
                              <div class="panel-heading">
@@ -79,11 +85,11 @@
                             </div>
                         </div>
                     <% end %>
-                    
+                        
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     <!--<div class="map">-->
     <!--    <div class="row vertical-center-row">-->
     <!--        <div style='width: 800px; display: block; margin:auto; margin-top: 100px'>-->
