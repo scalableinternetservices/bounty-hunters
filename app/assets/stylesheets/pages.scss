@@ -56,3 +56,19 @@
         width: 100%;
     }
 }
+
+
+/* Map */
+.map {
+    height: 500px;
+}
+
+@media(max-width:768px) {
+    .map {
+        height: 75%;
+    }
+}
+
+.map iframe {
+    pointer-events: none;
+}

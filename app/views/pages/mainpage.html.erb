@@ -13,7 +13,7 @@
                 <div class="panel-group">
                     <% @tasks.each do |task| %>
                         <% unless task.claimer_id? %>
-                            <div class="panel panel-default">
+                            <div class="panel panel-info">
                                   <div class="panel-heading">
                                         <h2><%= task.name %></h2>
                                   </div>
@@ -26,14 +26,12 @@
                                         </p>
                                         <p>TIME CREATED: <%= task.created_at %></p>
                                         <p>POSTED BY: <%= task.owner.email %></p>
-                                        <p>Lat: <%= task.latitude %></p>
-                                        <p>Long: <%= task.longitude %></p>
                                         <%= button_to [:claim, task] do %>
-                                            <em>Claim</em>
+                                            <button class="btn btn-primary">Claim</button>
                                         <% end %>
                                         <% if current_user.posts.include? task %>
-                                            <%= button_to [:destroy, task] do %>
-                                                <strong>Delete</strong>
+                                            <%= button_to [:destroy, task] do  %>
+                                                <button class="btn btn-warning">Delete</button>
                                             <% end %>
                                         <% end %>
                                     </div>
@@ -53,7 +51,7 @@
                 <div class="panel-group">
                 
                     <% current_user.claims.each do |task| %>
-                        <div class="panel panel-default">
+                        <div class="panel panel-primary">
                              <div class="panel-heading">
                                 <h1><%= task.name %></h1>
                             </div>
@@ -67,10 +65,10 @@
                                 <p>TIME CREATED: <%= task.created_at %></p>
                                 <p>POSTED BY: <%= task.owner.email %></p>
                                 <%= button_to [:cancel, task], :method => :put  do %>
-                                    <em>Cancel</em>
+                                    <button class="btn btn-secondary">Cancel</button>
                                 <% end %>
                                 <%= button_to [:complete, task] do %>
-                                    <strong>Complete!</strong>
+                                    <button class="btn btn-success">Complete!</button>
                                 <% end %>
                             </div>
                         </div>
@@ -80,13 +78,19 @@
             </div>
         </div>
     </div>
-    <div class="container container-table">
-        <div class="row vertical-center-row">
-            <div style='width: 800px; display: block; margin:auto; margin-top: 100px'>
-              <div id="map" style='width: 800px; height: 400px;'></div>
-            </div>
-        </div>
-    </div>
+    <!--<div class="map">-->
+    <!--    <div class="row vertical-center-row">-->
+    <!--        <div style='width: 800px; display: block; margin:auto; margin-top: 100px'>-->
+    <!--          <div id="map" style='width: 800px; height: 400px;'></div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--</div>-->
+    
+    <section id="map" class="map">
+        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+        <br />
+        </iframe>
+    </section>
     
     <%= location_info = request.location %><br>
 
