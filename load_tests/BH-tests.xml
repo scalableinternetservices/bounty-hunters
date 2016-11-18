@@ -52,16 +52,6 @@
                 <var name="random_user_name" />
             </setdynvars>
             
-            <!-- Make a random number to set as a user password-->
-            <setdynvars sourcetype="random_number" start="1000" end="9999999">
-                <var name="random_user_password" />
-            </setdynvars>
-            
-            <!-- Make a random number to set as a task name -->
-            <!--<setdynvars sourcetype="random_number" start="1000" end="9999999">-->
-            <!--    <var name="random_task_name" />-->
-            <!--</setdynvars>-->
-            
             
             <!-- User Sign up -->
             <request subst="true">
@@ -69,9 +59,9 @@
                     url='/users'
                     version='1.1'
                     method='POST'          
-                    contents='user%5Bemail%5D=test_%%random_user_name%%%40gmail.com
-                    &amp;user%5Bpassword%5D=pass_%%random_user_password%%
-                    &amp;user%5Bpassword_confirmation%5D=pass_%%random_user_password%%
+                    contents='user%5Bemail%5D=test_%%_random_user_name%%%40gmail.com
+                    &amp;user%5Bpassword%5D=password
+                    &amp;user%5Bpassword_confirmation%5D=password
                     &amp;commit=Sign+up'>
                 </http>
             </request>
@@ -84,67 +74,69 @@
             <!-- wait for up to 2 seconds, user will create a task -->
             <thinktime value="2" random="true"></thinktime>
             
-            <!-- Creating a task WHAT SHOULD WE INPUT??-->
+            <!-- Creating a task -->
             <request subst="true">
+                
+                <dyn_variable name="created_task_id" re="[Ll]ocation: http://.*/tasks/(.*)\r"/>
+                
                 <http
                     url='/tasks'
                     version='1.1'
                     method='POST'
                 
-                    contents='task%5Bname%5D=Testing+again
+                    contents='task%5Bname%5D=Test+Task
                     &amp;task%5Baddress%5D=Santa+Monica%2C+CA
-                    &amp;task%5Bdescription%5D=123213
-                    &amp;task%5Bprice%5D=12312
-                    &amp;task%5Btags%5D%5B%5D=123
-                    &amp;task%5Bowner_id%5D=2
+                    &amp;task%5Bdescription%5D=This+is+a+test+task
+                    &amp;task%5Bprice%5D=100
+                    &amp;task%5Btags%5D%5B%5D=100
+                    &amp;task%5Bowner_id%5D=1
                     &amp;commit=Create+a+task'>
                 </http>
             </request>
             
-            <!-- wait for up to 2 seconds, user will create a task -->
+            
+            <!-- wait for up to 2 seconds, user will claim task then decide to cancel -->
             <thinktime value="2" random="true"></thinktime>
             
-            
-            <!-- confused about this part... NEED HELP!!! -->
-            <!-- how to order these posts / puts without any data -->
-            
-            <!-- Claiming a task, can only claim 1 task at a time?  -->
+            <!-- Claiming a task -->
             <request subst="true">
                 <http
-                    url='tasks/1/claim'
+                    url='tasks/%%_created_task_id%%/claim'
                     version='1.1'
                     method='PUT'>
                 </http>
             </request>
             
-            <!-- Canceling a task, can only cancel 1 task at a time?  -->
+            <!-- Canceling a task -->
             <request subst="true">
                 <http
-                    url='tasks/1/cancel'
+                    url='tasks/%%_created_task_id%%/cancel'
                     version='1.1'
                     method='PUT'>
                 </http>
             </request>
             
-            <!-- Deleting a task, can only cancel 1 task at a time?  -->
-            <request subst="true">
-                <http
-                    url='tasks/1/destroy'
-                    version='1.1'
-                    method='POST'>
-                </http>
-            </request>
+            <!-- wait for up to 2 seconds, user will create a task and then the task will be marked as completed-->
+            <thinktime value="2" random="true"></thinktime>
             
-            <!-- completing a task, can only cancel 1 task at a time?  -->
+            <!-- Claiming a task -->
             <request subst="true">
                 <http
-                    url='tasks/1/complete'
+                    url='tasks/%%_created_task_id%%/claim'
                     version='1.1'
-                    method='POST'>
+                    method='PUT'>
                 </http>
             </request>
             
             
+            <!-- completing a task -->
+            <request subst="true">
+                <http
+                    url='tasks/%%_created_task_id%%/complete'
+                    version='1.1'
+                    method='POST'>
+                </http>
+            </request>
             
             
             
