@@ -1,83 +1,85 @@
 <div class="container-fluid">  
     
-    <div class="row">
-        <div class="col-md-6 unclaimed">
-            
-            <div class="col-md-12">
-                <h1>Unclaimed Tasks:</h1>
-            </div>
-            <p></p>
-        
-        
-            <div class="col-md-12 uctasks">
-                <div class="panel-group">
-                    <% @tasks.each do |task| %>
-                        <% unless task.claimer_id? %>
-                            <div class="panel panel-info">
-                                  <div class="panel-heading">
-                                        <h2><%= task.name %></h2>
-                                  </div>
-                                  <div class="panel-body">
-                                        <p>LOCATION: <%= task.address %></p>
-                                        <p>DESCRIPTION: <%= task.description %></p>
-                                        <p>BOUNTY: $<%= task.price %></p>
-                                        <p>TAGS: 
-                                            <%= task.tags.join ' ' %> 
-                                        </p>
-                                        <p>TIME CREATED: <%= task.created_at %></p>
-                                        <p>POSTED BY: <%= task.owner.email %></p>
-                                        <%= button_to [:claim, task] do %>
-                                            <button class="btn btn-primary">Claim</button>
-                                        <% end %>
-                                        <% if current_user.posts.include? task %>
-                                            <%= button_to [:destroy, task] do  %>
-                                                <button class="btn btn-warning">Delete</button>
-                                            <% end %>
-                                        <% end %>
-                                    </div>
-                                </div>
-                        <% end %>
-                    <% end %>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 claimed">
-            <div class="col-md-12">
-                <h1>Tasks you have claimed:</h1>
-            </div>
-                        <p></p>
-
-            <div class="col-md-12 ctasks">
-                <div class="panel-group">
+    <section class="task-panel panel-bg">
+        <div class="container">
+            <div class="col-md-6 unclaimed">
                 
-                    <% current_user.claims.each do |task| %>
-                        <div class="panel panel-primary">
-                             <div class="panel-heading">
-                                <h1><%= task.name %></h1>
-                            </div>
-                            <div class="panel-body">
-                                <p>LOCATION: <%= task.address %></p>
-                                <p>DESCRIPTION: <%= task.description %></p>
-                                <p>BOUNTY: $<%= task.price %></p>
-                                <p>TAGS: 
-                                    <%= task.tags.join ' ' %> 
-                                </p>
-                                <p>TIME CREATED: <%= task.created_at %></p>
-                                <p>POSTED BY: <%= task.owner.email %></p>
-                                <%= button_to [:cancel, task], :method => :put  do %>
-                                    <button class="btn btn-secondary">Cancel</button>
-                                <% end %>
-                                <%= button_to [:complete, task] do %>
-                                    <button class="btn btn-success">Complete!</button>
-                                <% end %>
-                            </div>
-                        </div>
-                    <% end %>
+                <div class="col-md-12">
+                    <h1>Unclaimed Tasks:</h1>
+                </div>
+                <p></p>
+            
+            
+                <div class="col-md-12 uctasks">
+                    <div class="panel-group">
+                        <% @tasks.each do |task| %>
+                            <% unless task.claimer_id? %>
+                                <div class="panel panel-info">
+                                      <div class="panel-heading">
+                                            <h2><%= task.name %></h2>
+                                      </div>
+                                      <div class="panel-body">
+                                            <p>LOCATION: <%= task.address %></p>
+                                            <p>DESCRIPTION: <%= task.description %></p>
+                                            <p>BOUNTY: $<%= task.price %></p>
+                                            <p>TAGS: 
+                                                <%= task.tags.join ' ' %> 
+                                            </p>
+                                            <p>TIME CREATED: <%= task.created_at %></p>
+                                            <p>POSTED BY: <%= task.owner.email %></p>
+                                            <%= button_to [:claim, task] do %>
+                                                <button class="btn btn-primary">Claim</button>
+                                            <% end %>
+                                            <% if current_user.posts.include? task %>
+                                                <%= button_to [:destroy, task] do  %>
+                                                    <button class="btn btn-warning">Delete</button>
+                                                <% end %>
+                                            <% end %>
+                                        </div>
+                                    </div>
+                            <% end %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 claimed">
+                <div class="col-md-12">
+                    <h1>Tasks you have claimed:</h1>
+                </div>
+                            <p></p>
+    
+                <div class="col-md-12 ctasks">
+                    <div class="panel-group">
                     
+                        <% current_user.claims.each do |task| %>
+                            <div class="panel panel-primary">
+                                 <div class="panel-heading">
+                                    <h1><%= task.name %></h1>
+                                </div>
+                                <div class="panel-body">
+                                    <p>LOCATION: <%= task.address %></p>
+                                    <p>DESCRIPTION: <%= task.description %></p>
+                                    <p>BOUNTY: $<%= task.price %></p>
+                                    <p>TAGS: 
+                                        <%= task.tags.join ' ' %> 
+                                    </p>
+                                    <p>TIME CREATED: <%= task.created_at %></p>
+                                    <p>POSTED BY: <%= task.owner.email %></p>
+                                    <%= button_to [:cancel, task], :method => :put  do %>
+                                        <button class="btn btn-secondary">Cancel</button>
+                                    <% end %>
+                                    <%= button_to [:complete, task] do %>
+                                        <button class="btn btn-success">Complete!</button>
+                                    <% end %>
+                                </div>
+                            </div>
+                        <% end %>
+                        
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
     <!--<div class="map">-->
     <!--    <div class="row vertical-center-row">-->
     <!--        <div style='width: 800px; display: block; margin:auto; margin-top: 100px'>-->
