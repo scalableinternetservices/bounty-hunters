@@ -15,7 +15,8 @@
                         <% unless task.claimer_id? %>
                             <div class="panel panel-info">
                                   <div class="panel-heading">
-                                        <h2><%= task.name %></h2>
+
+                                    <h1><%= link_to task.name, task %></h1>  
                                   </div>
                                   <div class="panel-body">
                                         <p>LOCATION: <%= task.address %></p>
@@ -53,7 +54,7 @@
                     <% current_user.claims.each do |task| %>
                         <div class="panel panel-primary">
                              <div class="panel-heading">
-                                <h1><%= task.name %></h1>
+                                    <h1><%= link_to task.name, task, {:style=>'color:white'}%></h1>  
                             </div>
                             <div class="panel-body">
                                 <p>LOCATION: <%= task.address %></p>
@@ -104,7 +105,13 @@
             {
               "lat": <%= lat %>,
               "lng": <%= long %>,
+              "picture": {
+                  "url": "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                  "width": 40,
+                  "height": 40
+                },
               "infowindow": "This is where you are!"
+             
             }
           ]);
             
