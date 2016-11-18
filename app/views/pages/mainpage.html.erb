@@ -1,5 +1,7 @@
 <div class="container-fluid">  
-    
+
+    <!-- THE CURRENT USER ID IS <%= current_user.id %> -->
+
     <div class="row">
         <div class="col-md-6 unclaimed">
             
@@ -13,6 +15,7 @@
                 <div class="panel-group">
                     <% @tasks.each do |task| %>
                         <% unless task.claimer_id? %>
+                            <!-- THE ID FOR THIS UNCLAIMED TASK IS <%= task.id %> -->
                             <div class="panel panel-info">
                                   <div class="panel-heading">
 
@@ -52,6 +55,8 @@
                 <div class="panel-group">
                 
                     <% current_user.claims.each do |task| %>
+                        <!-- THE ID FOR THIS CLAIMED TASK IS <%= task.id %> -->
+
                         <div class="panel panel-primary">
                              <div class="panel-heading">
                                     <h1><%= link_to task.name, task, {:style=>'color:white'}%></h1>  

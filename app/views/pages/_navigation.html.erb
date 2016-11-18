@@ -2,6 +2,10 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <% if user_signed_in? then %>
+      
+          <!-- THE CURRENT USER ID IS <%= current_user.id %> -->
+
+      
         <%= link_to "BOUNTY", main_app_path, { :class=>"navbar-brand" } %>
       <% else %>
         <%= link_to "BOUNTY", landing_page_path, { :class=>"navbar-brand" } %>
