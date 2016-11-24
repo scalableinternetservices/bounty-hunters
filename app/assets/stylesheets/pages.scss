@@ -56,3 +56,31 @@
         width: 100%;
     }
 }
+
+
+/* Map */
+.map {
+    height: 500px;
+}
+
+@media(max-width:768px) {
+    .map {
+        height: 75%;
+    }
+}
+
+.map iframe {
+    pointer-events: none;
+}
+
+
+// navbar search form
+#search-form{
+    padding: 12px;
+}
+
+.search-box {
+    height: 30px;
+    border-radius: 5px;
+    border: solid 2px #c9c9c9;
+}
