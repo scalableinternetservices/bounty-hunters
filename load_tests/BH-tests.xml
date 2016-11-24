@@ -14,7 +14,7 @@
     
     <!-- Defining phase of user arrivals -->
     <load>
-        <arrivalphase phase="1" duration="2" unit="second">
+        <arrivalphase phase="1" duration="1" unit="second">
             <users arrivalrate="1" unit="second"></users>
         </arrivalphase>
     </load>
@@ -106,7 +106,8 @@
                 <http
                     url='tasks/%%_created_task_id%%/cancel'
                     version='1.1'
-                    method='POST'>
+                    method='POST'
+                    contents='_method=put'>
                 </http>
             </request>
             
