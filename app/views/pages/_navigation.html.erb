@@ -2,6 +2,10 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <% if user_signed_in? then %>
+      
+          <!-- THE CURRENT USER ID IS <%= current_user.id %> -->
+
+      
         <%= link_to "BOUNTY", main_app_path, { :class=>"navbar-brand" } %>
       <% else %>
         <%= link_to "BOUNTY", landing_page_path, { :class=>"navbar-brand" } %>
@@ -12,6 +16,14 @@
       <ul class="nav navbar-nav">
         <li><%= link_to "Post a task", new_task_path %></li>
         <li><%= link_to "View all tasks", main_app_path %></li>
+        <li>
+            <%= form_tag(index_task_path, :method => "get", id: "search-form") do %>
+            <%= text_field_tag :search, params[:search], placeholder: "Search tasks by tags", class:"search-box" %>
+            <%= submit_tag "Search", class: "btn btn-primary btn-sm" %>
+            <% end %>
+
+        </li>
+
       </ul>
       
       <ul class="nav navbar-nav navbar-right">

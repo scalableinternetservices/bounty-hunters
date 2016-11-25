@@ -7,6 +7,9 @@ class Task < ActiveRecord::Base
     validates :description, length: { in: 1..1000 }
     validates :price, numericality: { greater_than_or_equal_to: 0 }
     
+    def self.search(search)
+      where("tags LIKE ?", "%#{search}%") 
+    end
     
     # unsure of gmaps api if we ever add but something like this
     #has_one :location, class_name: 'Address'

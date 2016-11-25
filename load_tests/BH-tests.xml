@@ -14,17 +14,8 @@
     
     <!-- Defining phase of user arrivals -->
     <load>
-        <arrivalphase phase="1" duration="30" unit="second">
+        <arrivalphase phase="1" duration="1" unit="second">
             <users arrivalrate="1" unit="second"></users>
-        </arrivalphase>
-        <arrivalphase phase="2" duration="30" unit="second">
-            <users arrivalrate="2" unit="second"></users>
-        </arrivalphase>
-        <arrivalphase phase="3" duration="30" unit="second">
-            <users arrivalrate="4" unit="second"></users>
-        </arrivalphase>
-        <arrivalphase phase="4" duration="30" unit="second">
-            <users arrivalrate="8" unit="second"></users>
         </arrivalphase>
     </load>
     
@@ -56,6 +47,9 @@
             
             <!-- User Sign up -->
             <request subst="true">
+                
+
+                
                 
                 <http
                     url='/users'
@@ -91,7 +85,6 @@
                     &amp;task%5Bdescription%5D=This+is+a+test+task
                     &amp;task%5Bprice%5D=100
                     &amp;task%5Btags%5D%5B%5D=100
-                    &amp;task%5Bowner_id%5D=1
                     &amp;commit=Create+a+task'>
                 </http>
             </request>
@@ -106,7 +99,7 @@
                 <http
                     url='tasks/%%_created_task_id%%/claim'
                     version='1.1'
-                    method='PUT'>
+                    method='POST'>
                 </http>
             </request>
             
@@ -115,7 +108,8 @@
                 <http
                     url='tasks/%%_created_task_id%%/cancel'
                     version='1.1'
-                    method='PUT'>
+                    method='POST'
+                    contents='_method=put'>
                 </http>
             </request>
             
@@ -132,7 +126,7 @@
                 <http
                     url='tasks/%%_created_task_id%%/claim'
                     version='1.1'
-                    method='PUT'>
+                    method='POST'>
                 </http>
             </request>
             
