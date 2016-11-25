@@ -14,17 +14,8 @@
     
     <!-- Defining phase of user arrivals -->
     <load>
-        <arrivalphase phase="1" duration="30" unit="second">
+        <arrivalphase phase="1" duration="1" unit="second">
             <users arrivalrate="1" unit="second"></users>
-        </arrivalphase>
-        <arrivalphase phase="2" duration="30" unit="second">
-            <users arrivalrate="2" unit="second"></users>
-        </arrivalphase>
-        <arrivalphase phase="3" duration="30" unit="second">
-            <users arrivalrate="4" unit="second"></users>
-        </arrivalphase>
-        <arrivalphase phase="4" duration="30" unit="second">
-            <users arrivalrate="8" unit="second"></users>
         </arrivalphase>
     </load>
     
@@ -56,15 +47,14 @@
             
             <!-- User Sign up -->
             <request subst="true">
-                
                 <http
-                    url='/users'
-                    version='1.1'
-                    method='POST'          
-                    contents='user%5Bemail%5D=test_%%_random_user_name%%%40gmail.com
+                    url="/users"
+                    version="1.1"
+                    method="POST"          
+                    contents="user%5Bemail%5D=test_%%_random_user_name%%%40gmail.com
                     &amp;user%5Bpassword%5D=password
                     &amp;user%5Bpassword_confirmation%5D=password
-                    &amp;commit=Sign+up'>
+                    &amp;commit=Sign+up">
                 </http>
             </request>
             
@@ -82,17 +72,16 @@
                 <dyn_variable name="created_task_id" re="[Ll]ocation: http://.*/tasks/(.*)\r"/>
                 
                 <http
-                    url='/tasks'
-                    version='1.1'
-                    method='POST'
+                    url="/tasks"
+                    version="1.1"
+                    method="POST"
                 
-                    contents='task%5Bname%5D=Test+Task          
+                    contents="task%5Bname%5D=Test+Task          
                     &amp;task%5Baddress%5D=Santa+Monica%2C+CA
                     &amp;task%5Bdescription%5D=This+is+a+test+task
                     &amp;task%5Bprice%5D=100
                     &amp;task%5Btags%5D%5B%5D=100
-                    &amp;task%5Bowner_id%5D=1
-                    &amp;commit=Create+a+task'>
+                    &amp;commit=Create+a+task">
                 </http>
             </request>
             
@@ -104,18 +93,19 @@
             <!-- Claiming a task -->
             <request subst="true">
                 <http
-                    url='tasks/%%_created_task_id%%/claim'
-                    version='1.1'
-                    method='PUT'>
+                    url="/tasks/%%_created_task_id%%/claim"
+                    version="1.1"
+                    method="POST">
                 </http>
             </request>
             
             <!-- Canceling a task -->
             <request subst="true">
                 <http
-                    url='tasks/%%_created_task_id%%/cancel'
-                    version='1.1'
-                    method='PUT'>
+                    url="/tasks/%%_created_task_id%%/cancel"
+                    version="1.1"
+                    method="POST"
+                    contents="_method=put">
                 </http>
             </request>
             
@@ -130,9 +120,9 @@
             <!-- Claiming a task -->
             <request subst="true">
                 <http
-                    url='tasks/%%_created_task_id%%/claim'
-                    version='1.1'
-                    method='PUT'>
+                    url="/tasks/%%_created_task_id%%/claim"
+                    version="1.1"
+                    method="POST">
                 </http>
             </request>
             
@@ -140,9 +130,9 @@
             <!-- completing a task -->
             <request subst="true">
                 <http
-                    url='tasks/%%_created_task_id%%/complete'
-                    version='1.1'
-                    method='POST'>
+                    url="/tasks/%%_created_task_id%%/complete"
+                    version="1.1"
+                    method="POST">
                 </http>
             </request>
             
