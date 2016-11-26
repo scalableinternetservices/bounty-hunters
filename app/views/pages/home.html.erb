@@ -1,52 +1,63 @@
 <div class="landing_page">
   <div class="container">
     <div class="row">
-      <div class="col-md-6 col-md-offset-3 panel panel-default"> 
-        <h1>THE HUNT IS ON</h1>
-        <h5>
-          Bounty Hunters is a brand new project looking to redefine the way we work.<br>
-          By Andrew Lin, Siyu Chen, Howard Huang, and Alex Waz.<br>
-          Sign up and start hunting!
-        </h5>
-            
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {:class => "form-horizontal center"}) do |f| %>
-          <%= devise_error_messages! %>
-          <div class="form-group">
-            <%= f.label :email, class: "col-sm-4 control-label" %>
-            <div class="col-sm-8">
-              <%= f.email_field :email, autofocus: true, class: "form-control" %>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :password, class: "col-sm-4 control-label" %>
-            <% if @minimum_password_length %>
-              <em>(<%= @minimum_password_length %> characters minimum)</em>
-            <% end %>
-            <div class="col-sm-8">
-              <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :password_confirmation, class: "col-sm-4 control-label" %>
-            <div class="col-sm-8">
-              <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-8">
-              <%= f.submit "Sign up", class: "btn btn-success" %>
-            </div>
-          </div>
-        <% end %>
-        
-        <h5 class="col-sm-offset-4 col-sm-8">Already have an account? <%= link_to "Log in", sign_in_path %></h5>
-        
-
-        <!--<%= render "devise/shared/links" %>  -->
-      </div>
+       <div class="col-md-12">
+         <img class="logo-banner" src="http://imgur.com/NvZwipQ.png">
+       </div>
     </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-6 col-md-offset-3 panel panel-default"> 
+          <h1>THE HUNT IS ON</h1>
+          <h5>
+            Bounty Hunters is a brand new project looking to redefine the way we work.<br>
+            By Andrew Lin, Siyu Chen, Howard Huang, and Alex Waz.<br>
+            Sign up and start hunting!
+          </h5>
+              
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {:class => "form-horizontal center"}) do |f| %>
+            <%= devise_error_messages! %>
+            <div class="form-group">
+              <%= f.label :email, class: "col-sm-4 control-label" %>
+              <div class="col-sm-8">
+                <%= f.email_field :email, autofocus: true, class: "form-control" %>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <%= f.label :password, class: "col-sm-4 control-label" %>
+              <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %>
+              <div class="col-sm-8">
+                <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <%= f.label :password_confirmation, class: "col-sm-4 control-label" %>
+              <div class="col-sm-8">
+                <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <div class="col-sm-offset-4 col-sm-8">
+                <%= f.submit "Sign up", class: "btn btn-success" %>
+              </div>
+            </div>
+          <% end %>
+          
+          <h5 class="col-sm-offset-4 col-sm-8">Already have an account? <%= link_to "Log in", sign_in_path %></h5>
+          
+  
+          <!--<%= render "devise/shared/links" %>  -->
+        </div>
+      </div>
+      
+    </div>
+    
+
+    
   </div>                    
 </div>
