@@ -1,7 +1,16 @@
-<div class="container-fluid">  
+<div class="container-fluid animated fadeIn">  
     <!-- THE CURRENT USER ID IS <%= current_user.id%> -->
+    
+    <section id="map" class="map">
+        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+        <br />
+        </iframe>
+    </section>
+    
     <section class="task-panel panel-bg">
+        
         <div class="container">
+
 
             <div class="col-md-6 unclaimed">
                 
@@ -86,28 +95,14 @@
             </div>
         </div>
     </section>
-    <!--<div class="map">-->
-    <!--    <div class="row vertical-center-row">-->
-    <!--        <div style='width: 800px; display: block; margin:auto; margin-top: 100px'>-->
-    <!--          <div id="map" style='width: 800px; height: 400px;'></div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    <!--</div>-->
     
-    <section id="map" class="map">
-        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-        <br />
-        </iframe>
-    </section>
-    
-    <%= location_info = request.location %><br>
-
+    <div style="display:none"><%= location_info = request.location %><br>
     <%= lat = location_info.latitude %><br>
-    <%= long = location_info.longitude %><br>
+    <%= long = location_info.longitude %><br></div>
     
     <script>
         handler = Gmaps.build('Google');
-        handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+        handler.buildMap({ provider: {}, internal: {id: 'map'} }, function(){
           markers = handler.addMarkers([
             {
               "lat": <%= lat %>,
@@ -127,9 +122,9 @@
           <% end %>
           handler.bounds.extendWith(markers);
           handler.fitMapToBounds();
-
-
+          handler.getMap().setZoom(13);
         });
+        
     </script>
     
     
