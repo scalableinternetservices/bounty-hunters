@@ -4,14 +4,16 @@
 
 /* General */    
 .landing_page { 
-    background: url(http://i.imgur.com/hd0ZmWG.jpg) no-repeat center center fixed;
+    background: url(http://i.imgur.com/hd0ZmWG.jpg) no-repeat center center;
+    background-attachment: fixed;
 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     
-    height: calc(100vh - 50px);
+    height: auto;
+    min-height: calc(100vh - 50px);
     width: 100vw;
 }
 
@@ -55,6 +57,19 @@
   font-size: 30px;
 }
 
+h1.tasks {
+    text-align: center;
+}
+
+.unclaimed {
+    border-right: 1px solid #ccc;
+}
+
+.claimed {
+    margin-left: -1px;
+    border-left: 1px solid #ccc;
+}
+
 @media screen and (max-width: 800px) {
     body {
         background-size: auto 100%;
@@ -78,16 +93,4 @@
 
 .map iframe {
     pointer-events: none;
-}
-
-
-// navbar search form
-#search-form{
-    padding: 12px;
-}
-
-.search-box {
-    height: 30px;
-    border-radius: 5px;
-    border: solid 2px #c9c9c9;
 }
