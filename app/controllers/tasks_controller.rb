@@ -1,4 +1,8 @@
 class TasksController < ApplicationController
+  def cache_key_task_row(task)
+    "task-#{task.id}"
+  end
+
   def new
     if user_signed_in?
       @task = Task.new
