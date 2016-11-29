@@ -1,7 +1,16 @@
 class TasksController < ApplicationController
+  before_action :set_submission, only: [:show, :edit, :update, :destroy]
+  
+  def show
+    fresh_when([@tasks])
+  end
+  
+  
   def new
     if user_signed_in?
-      @task = Task.new
+      if stale?([Task.all])
+        @task = Task.new if stale?(Task.all)
+      end
     else
       redirect_to new_user_session_path, notice: 'Log in to create a new task.'
     end
@@ -24,9 +33,13 @@ class TasksController < ApplicationController
   
   def index
     if params[:search]
-      @tasks = Task.search(params[:search])
+      if stale?([Task.all])
+        @tasks = Task.search(params[:search])
+      end
     else
-      @tasks = Task.all
+      if stale?([Task.all])
+        @tasks = Task.all
+      end
     end
   end
 
