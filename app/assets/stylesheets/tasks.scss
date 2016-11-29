@@ -12,6 +12,24 @@ body {
 }
 
 
+
+.half {
+  float: left;
+  width: 48%;
+  margin-bottom: 1em;
+}
+
+.right { width: 50%; }
+
+.left {
+     margin-right: 2%; 
+}
+
+.textarea{
+    width: 100%; 
+}
+
+
 // panel
 // .panel-bg{
     //color: white;
