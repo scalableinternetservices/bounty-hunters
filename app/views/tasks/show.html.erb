@@ -1,21 +1,40 @@
-<h1><%= @task.name %></h1><br>
-
-<p>LOCATION: <%= @task.address %></p>
-<p>DESCRIPTION: <%= @task.description %></p>
-<p>BOUNTY: $<%= @task.price %></p><br>
-<p>TIME CREATED: <%= @task.created_at %></p>
-<p>TAGS: 
-    <%= @task.tags.join ' ' %> 
-</p>
-<p>POSTED BY: <%= @task.owner.email %></p>
-
-<% if current_user.posts.include? @task %>
-    <%= button_to [:destroy, @task] do %>
-        <strong>Delete</strong>
-    <% end %>
-<% end %>
-
+<div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-info" style="margin-top: 20px">
+        <div class="panel-heading">
+            <h2 class="panel-title"><%= @task.name %> <span class="badge"><%= number_to_currency(@task.price) %></span></h2>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@task.latitude},#{@task.longitude}&markers=#{@task.latitude},#{@task.longitude}&zoom=12&size=800x400",
+                  class: 'img-responsive img-rounded center-block'%><br>
+                Location: <%= @task.address %>
+            </li>
+        </ul>
+        <div class="panel-body">
+            <p><%= @task.description %></p><br>
+            <p><em>Tagged: <%= @task.tags.join ' ' %></em></p>
+            
+            <div class="btn-group btn-group-justified" role="group">
+                <% if current_user.claims.include? @task %>
+                    <%= link_to [:cancel, @task], :method => :put, class: "btn btn-warning", role: "button" do %>
+                        <strong>Cancel</strong>
+                    <% end %>
+                    <%= link_to [:complete, @task], :method => :post, class: "btn btn-success", role: "button" do %>
+                        <strong>Complete!</strong>
+                    <% end %>
+                <% else %>
+                    <%= link_to [:claim, @task], class: "btn btn-primary", role: "button", :method => :post do %>
+                        <strong>Claim</strong>
+                    <% end %>
+                <% end %>
+                <% if current_user.posts.include? @task %>
+                    <%= link_to [:destroy, @task], :method => :post, class: "btn btn-danger", role: "button" do %>
+                        <strong>Delete</strong>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+        <div class="panel-footer">by <em><%= @task.owner.email %></em> on <%= @task.created_at.strftime("%m/%d/%Y at %I:%M%p") %></div>
+    </div>
+</div>
 <!-- <p>Coordinates: <%= @task.latitude %> <%= @task.longitude %></p> -->
-<br><br>
-<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@task.latitude},#{@task.longitude}&markers=#{@task.latitude},#{@task.longitude}&zoom=7&size=640x400",
-              class: 'img-fluid img-rounded'%>

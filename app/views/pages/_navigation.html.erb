@@ -16,21 +16,18 @@
       <ul class="nav navbar-nav">
         <li><%= link_to "Post a task", new_task_path %></li>
         <li><%= link_to "View all tasks", main_app_path %></li>
-        <li>
-            <%= form_tag(index_task_path, :method => "get", id: "search-form") do %>
-            <%= text_field_tag :search, params[:search], placeholder: "Search tasks by tags", class:"search-box" %>
-            <%= submit_tag "Search", class: "btn btn-primary btn-sm" %>
-            <% end %>
-
-        </li>
-
       </ul>
+      
+      <%= form_tag(index_task_path, :method => "get", class: "navbar-form navbar-left") do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Search tasks by tags", class: "form-control" %>
+        <%= submit_tag "Search", class: "btn btn-default" %>
+      <% end %>
       
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
       </ul>
       <p class="nav navbar-text navbar-right">Welcome back <%= current_user.email %>!</p>
-      <p class="nav navbar-text navbar-right">Balance $<%= current_user.amount %>.</p>
+      <p class="nav navbar-text navbar-right">Balance <span class="badge"><%= number_to_currency(current_user.amount) %></span></p>
     <% else %>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Log in",  sign_in_path %></li>
