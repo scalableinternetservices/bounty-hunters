@@ -34,14 +34,16 @@
                                     </ul>
                                     <div class="panel-body">
                                         <p><%= task.description %></p><br>
-                                        <p><em>Tagged: <%= task.tags.join ' ' %></em></p>
+                                        <p><%= task.tags.split(",") %></p>
                                         
                                         <div class="btn-group btn-group-justified" role="group">
-                                            <%= link_to [:claim, task], class: "btn btn-primary", role: "button", :method => :post do %>
-                                                <strong>Claim</strong>
+                                            <% if !current_user.posts.include? task %>
+                                                <%= link_to [:claim, task], class: "btn btn-primary", role: "button", :method => :post do %>
+                                                    <strong>Claim</strong>
+                                                <% end %>
                                             <% end %>
                                             <% if current_user.posts.include? task %>
-                                                <%= link_to [:destroy, task], class: "btn btn-danger", role: "button", :method => :post do  %>
+                                                <%= link_to [:destroy, task], class: "btn btn-danger", role: "button", :method => :post, data: { confirm: 'Are you sure?' } do  %>
                                                     <strong>Delete</strong>
                                                 <% end %>
                                             <% end %>
