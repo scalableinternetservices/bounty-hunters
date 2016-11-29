@@ -1,7 +1,7 @@
 <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-info" style="margin-top: 20px">
         <div class="panel-heading">
-            <h2 class="panel-title"><%= @task.name %> <span class="badge"><%= number_to_currency(@task.price) %></span></h2>
+            <h2 class="panel-title"><%= @task.name %> <span class="badge balance-badge"><%= number_to_currency(@task.price) %></span></h2>
         </div>
         <ul class="list-group">
             <li class="list-group-item">
@@ -12,7 +12,11 @@
         </ul>
         <div class="panel-body">
             <p><%= @task.description %></p><br>
-            <p><em>Tagged: <%= @task.tags.join ' ' %></em></p>
+            <p>
+                <%= @task.tags.join(' ').split(',').each do |tag| %>
+                    <span class="badge tag-badge"> <%= tag %></span>
+                <% end %>
+            </p>
             
             <div class="btn-group btn-group-justified" role="group">
                 <% if current_user.claims.include? @task %>

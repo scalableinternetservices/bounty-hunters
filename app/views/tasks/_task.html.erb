@@ -27,14 +27,18 @@
                                 <!-- THE ID OF THIS UNCLAIMED TASK IS <%= task.id %> -->
                                 <div class="panel panel-info" style="margin-top: 20px">
                                     <div class="panel-heading">
-                                        <h3 class="panel-title"><%= link_to task.name, task %> <span class="badge"><%= number_to_currency(task.price) %></span></h3>
+                                        <h3 class="panel-title"><%= link_to task.name, task %> <span class="badge balance-badge"><%= number_to_currency(task.price) %></span></h3>
                                     </div>
                                     <ul class="list-group">
                                         <li class="list-group-item">Location: <%= task.address %></li>
                                     </ul>
                                     <div class="panel-body">
                                         <p><%= task.description %></p><br>
-                                        <p><%= task.tags.split(",") %></p>
+                                        <p>
+                                            <%= task.tags.join(' ').split(',').each do |tag| %>
+                                                <span class="badge tag-badge"> <%= tag %></span>
+                                            <% end %>
+                                        </p>
                                         
                                         <div class="btn-group btn-group-justified" role="group">
                                             <% if !current_user.posts.include? task %>
@@ -70,14 +74,18 @@
                              <!-- THE ID OF THIS CLAIMED TASK IS <%= task.id %> -->
                             <div class="panel panel-primary" style="margin-top: 20px">
                                 <div class="panel-heading">
-                                    <h3 class="panel-title"><%= link_to task.name, task %> <span class="badge"><%= number_to_currency(task.price) %></span></h3>
+                                    <h3 class="panel-title"><%= link_to task.name, task %> <span class="badge balance-badge"><%= number_to_currency(task.price) %></span></h3>
                                 </div>
                                 <ul class="list-group">
                                     <li class="list-group-item">Location: <%= task.address %></li>
                                 </ul>
                                 <div class="panel-body">
                                     <p><%= task.description %></p><br>
-                                    <p><em>Tagged: <%= task.tags.join ' ' %></em></p>
+                                    <p>
+                                        <%= task.tags.join(' ').split(',').each do |tag| %>
+                                            <span class="badge tag-badge"> <%= tag %></span>
+                                        <% end %>
+                                    </p>
                                     
                                     <div class="btn-group btn-group-justified" role="group">
                                         <%= link_to [:cancel, task], :method => :put, class: "btn btn-warning", role: "button" do %>
