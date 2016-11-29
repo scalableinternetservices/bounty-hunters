@@ -3,5 +3,6 @@
     <%= render partial: "tasks/task", collection: @tasks %>
     <%= yield %>
 <% else %>
+    <br>
     <p>There are no tasks containing the tag(s) <%= params[:search] %>.</p>
 <% end %>
