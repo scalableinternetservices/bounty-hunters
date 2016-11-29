@@ -1,7 +1,4 @@
 class TasksController < ApplicationController
-  def cache_key_task_row(task)
-    "task-#{task.id}"
-  end
 
   def new
     if user_signed_in?
@@ -54,7 +51,7 @@ class TasksController < ApplicationController
     unless @task.claimer_id?
       current_user.claims << @task
       if @task.save
-        redirect_to :back, alert: "Successfully claimed task!"
+        redirect_to main_app_path, alert: "Successfully claimed task!"
       else
         redirect_to main_app, alert: "Error saving claim."
       end
@@ -78,7 +75,7 @@ class TasksController < ApplicationController
   
   def cancel
     Task.update(params[:id], :claimer_id=>nil)
-    redirect_to :back, alert: "Successfully canceled task!"
+    redirect_to main_app_path, alert: "Successfully claimed task!"
   end
   
   private
