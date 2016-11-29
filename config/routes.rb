@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'tasks/create'
   get 'tasks/map', to: "tasks#map", as: "map_task"
   get 'tasks/new', to: "tasks#new", as: "new_task"
+  get 'tasks/index', to: "tasks#index", as: "index_task"
   get 'tasks/show'
   resources :tasks
   

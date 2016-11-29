@@ -22,8 +22,13 @@ class TasksController < ApplicationController
     end
   end
   
+  
   def index
-    @tasks = Task.all
+    if params[:search]
+      @tasks = Task.search(params[:search])
+    else
+      @tasks = Task.all
+    end
   end
 
   def show
@@ -75,7 +80,7 @@ class TasksController < ApplicationController
   
   def cancel
     Task.update(params[:id], :claimer_id=>nil)
-    redirect_to main_app_path, alert: "Successfully claimed task!"
+    redirect_to main_app_path, alert: "Successfully canceled task!"
   end
   
   private
