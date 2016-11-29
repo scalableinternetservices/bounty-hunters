@@ -2,18 +2,16 @@
     <!-- THE CURRENT USER ID IS <%= current_user.id%> -->
     <section class="task-panel panel-bg">
         <div class="container">
-
+            
             <div class="col-md-6 unclaimed">
                 
                 <div class="col-md-12">
-                    <h1>Unclaimed Tasks:</h1>
-                </div>
-                <p></p>
-            
-        
+                    <h1>Search Results: </h1>
+                </div> 
+
                 <div class="col-md-12 uctasks">
                     <div class="panel-group">
-                        <% @tasks.each do |task| %>
+
                             <% unless task.claimer_id? %>
                                 <!-- THE ID OF THIS UNCLAIMED TASK IS <%= task.id %> -->
                                 <div class="panel panel-info">
@@ -41,12 +39,11 @@
                                     </div>
                                 </div>
                             <% end %>
-                        <% end %>
+
                     </div>
                 </div>
             </div>
-
-        
+            
             <div class="col-md-6 claimed">
                 <div class="col-md-12">
                     <h1>Tasks you have claimed:</h1>
@@ -93,5 +90,6 @@
     <!--        </div>-->
     <!--    </div>-->
     <!--</div>-->
+    
     
 </div>

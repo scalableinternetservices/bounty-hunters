@@ -21,8 +21,13 @@ class TasksController < ApplicationController
     end
   end
   
+  
   def index
-    @tasks = Task.all
+    if params[:search]
+      @tasks = Task.search(params[:search])
+    else
+      @tasks = Task.all
+    end
   end
 
   def show
