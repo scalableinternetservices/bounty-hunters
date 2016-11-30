@@ -1,6 +1,7 @@
 class Task < ActiveRecord::Base
     belongs_to :owner, class_name: 'User', :foreign_key => :owner_id
     belongs_to :claimer, class_name: 'User', :foreign_key => :claimer_id
+    belongs_to :completer, class_name: 'User', :foreign_key => :completer_id
     
     serialize :tags
     validates :name, length: { in: 1..50 }

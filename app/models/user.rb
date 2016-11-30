@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   
   # when destroyed, destroy all posts
   has_many :posts, class_name: 'Task', dependent: :destroy, :foreign_key => :owner_id
-  # when destroyed, nullify all claimsrai
+  # when destroyed, nullify all claims
   has_many :claims, class_name: 'Task', dependent: :nullify, :foreign_key => :claimer_id
+  # when destroyed, nullify all completes
+  has_many :completes, class_name: 'Task', dependent: :nullify, :foreign_key => :completer_id
 end
