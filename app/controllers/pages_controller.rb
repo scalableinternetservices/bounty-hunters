@@ -8,7 +8,8 @@ class PagesController < ApplicationController
     
     def mainpage
         if current_user
-            @tasks = Task.all
+            #eager loading
+            @tasks = Task.includes(:owner).all
         else
             redirect_to new_user_session_path, notice: 'Log in to see main application page.'
         end
