@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115203653) do
+ActiveRecord::Schema.define(version: 20161130230514) do
 
   create_table "tasks", force: :cascade do |t|
     t.string   "name"
@@ -26,9 +26,6 @@ ActiveRecord::Schema.define(version: 20161115203653) do
     t.float    "longitude"
     t.string   "tags",        default: "--- []\n"
   end
-
-  add_index "tasks", ["claimer_id"], name: "index_tasks_on_claimer_id"
-  add_index "tasks", ["owner_id"], name: "index_tasks_on_owner_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -47,10 +44,5 @@ ActiveRecord::Schema.define(version: 20161115203653) do
     t.integer  "claims_id"
     t.integer  "amount",                 default: 0
   end
-
-  add_index "users", ["claims_id"], name: "index_users_on_claims_id"
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["posts_id"], name: "index_users_on_posts_id"
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end
