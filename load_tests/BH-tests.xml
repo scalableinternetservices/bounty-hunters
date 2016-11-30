@@ -145,7 +145,18 @@
                 </http>
             </request>
 
-
+            <!-- wait for up to 2 seconds, user will look at the pending tasks then the tasks will be marked as confirmed-->
+            <thinktime value="2" random="true"></thinktime>
+            
+            <!-- confirming a task -->
+            <request subst="true">
+                <http
+                    url="/tasks/%%_created_task_id%%/confirm"
+                    version="1.1"
+                    method="POST">
+                </http>
+            </request>
+            
 
         </session>
     </sessions>
