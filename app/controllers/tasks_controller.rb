@@ -37,6 +37,26 @@ class TasksController < ApplicationController
     end
   end
   
+
+  def confirm
+    @task = Task.find_by_id(params[:id])
+    if current_user.posts.include? @task
+      if @task.completer_id
+        user = User.find_by_id(@task.completer_id)
+        price = @task.price + user.amount
+        if @task.destroy
+          user.update_attribute(:amount, price)
+          redirect_to pending_task_path, alert: "Owner confirmed, and completer succesfully earned bounty. Task successfully destroyed."
+        else
+          redirect_to @task, alert: "Error destroying task."
+        end
+      else
+        redirect_to pending_task_path, alert: "Task is not completed by the claimer yet."
+      end
+    end
+  end
+  
+  
   def destroy
     @task = Task.find_by_id(params[:id])
     if current_user.posts.include? @task
@@ -67,13 +87,19 @@ class TasksController < ApplicationController
   def complete
     @task = Task.find_by_id(params[:id])
     if current_user.claims.include? @task
-      price = @task.price + current_user.amount
-      if @task.destroy
-        current_user.update_attribute(:amount, price)
-        redirect_to main_app_path, alert: "Task successfully completed."
+      current_user.completes << @task
+      if @task.save
+        redirect_to pending_task_path, alert: "Successfully completed task! Waiting owner to confirm"
       else
-        redirect_to @task, alert: "Error completing task."
+        redirect_to main_app, alert: "Error saving claim."
       end
+      # price = @task.price + current_user.amount
+      # if @task.destroy
+      #   current_user.update_attribute(:amount, price)
+      #   redirect_to main_app_path, alert: "Task successfully completed."
+      # else
+      #   redirect_to @task, alert: "Error completing task."
+      # end
     end
   end
   
