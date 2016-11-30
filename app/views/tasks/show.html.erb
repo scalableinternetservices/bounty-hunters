@@ -13,13 +13,17 @@
         <div class="panel-body">
             <p><%= @task.description %></p><br>
             <p>
-                <%= @task.tags.join(' ').split(',').each do |tag| %>
+                <% @task.tags.join(' ').split(',').each do |tag| %>
                     <span class="badge tag-badge"> <%= tag %></span>
                 <% end %>
             </p>
             
             <div class="btn-group btn-group-justified" role="group">
-                <% if current_user.claims.include? @task %>
+                <% if current_user.posts.include? @task %>
+                    <%= link_to [:destroy, @task], :method => :post, class: "btn btn-danger", role: "button" do %>
+                        <strong>Delete</strong>
+                    <% end %>
+                <% elsif current_user.claims.include? @task %>
                     <%= link_to [:cancel, @task], :method => :put, class: "btn btn-warning", role: "button" do %>
                         <strong>Cancel</strong>
                     <% end %>
@@ -29,11 +33,6 @@
                 <% else %>
                     <%= link_to [:claim, @task], class: "btn btn-primary", role: "button", :method => :post do %>
                         <strong>Claim</strong>
-                    <% end %>
-                <% end %>
-                <% if current_user.posts.include? @task %>
-                    <%= link_to [:destroy, @task], :method => :post, class: "btn btn-danger", role: "button" do %>
-                        <strong>Delete</strong>
                     <% end %>
                 <% end %>
             </div>
