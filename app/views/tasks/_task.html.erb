@@ -35,7 +35,7 @@
                                     <div class="panel-body">
                                         <p><%= task.description %></p><br>
                                         <p>
-                                            <%= task.tags.join(' ').split(',').each do |tag| %>
+                                            <% task.tags.join(' ').split(',').each do |tag| %>
                                                 <span class="badge tag-badge"> <%= tag %></span>
                                             <% end %>
                                         </p>
@@ -82,7 +82,7 @@
                                 <div class="panel-body">
                                     <p><%= task.description %></p><br>
                                     <p>
-                                        <%= task.tags.join(' ').split(',').each do |tag| %>
+                                        <% task.tags.join(' ').split(',').each do |tag| %>
                                             <span class="badge tag-badge"> <%= tag %></span>
                                         <% end %>
                                     </p>
