@@ -15,16 +15,16 @@
             <div class="col-md-6 unclaimed">
                 
                 <div class="col-md-12">
-                    <h1 class="tasks">Unclaimed Tasks</h1>
+                    <h1 class="tasks">Pending Completed Tasks</h1>
                 </div>
                 <p></p>
             
         
                 <div class="col-md-12 uctasks">
                     <div class="panel-group">
-                        <% @tasks.each do |task| %>
-                            <% unless task.claimer_id? %>
-                                <!-- THE ID OF THIS UNCLAIMED TASK IS <%= task.id %> -->
+                        <% current_user.completes.each do |task| %>
+
+                                <!-- THE ID OF THIS PENDING TASK IS <%= task.id %> -->
                                 <div class="panel panel-info" style="margin-top: 20px">
                                     <div class="panel-heading">
                                         <h3 class="panel-title"><%= link_to task.name, task %> <span class="badge balance-badge"><%= number_to_currency(task.price) %></span></h3>
@@ -39,39 +39,31 @@
                                                 <span class="badge tag-badge"> <%= tag %></span>
                                             <% end %>
                                         </p>
-                                        
-                                        <div class="btn-group btn-group-justified" role="group">
-                                            <% if !current_user.posts.include? task %>
-                                                <%= link_to [:claim, task], class: "btn btn-primary", role: "button", :method => :post do %>
-                                                    <strong>Claim</strong>
-                                                <% end %>
-                                            <% end %>
-                                            <% if current_user.posts.include? task %>
-                                                <%= link_to [:destroy, task], class: "btn btn-danger", role: "button", :method => :post, data: { confirm: 'Are you sure?' } do  %>
-                                                    <strong>Delete</strong>
-                                                <% end %>
-                                            <% end %>
-                                        </div>
                                     </div>
-                                    <div class="panel-footer">by <em><%= task.owner.email %></em> on <%= task.created_at.strftime("%m/%d/%Y at %I:%M%p") %></div>
+                                    <div class="progress">
+                                      <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="50"
+                                      aria-valuemin="0" aria-valuemax="100" style="width:50%">
+                                        Waiting <em><%= task.owner.email %></em> to confirm
+                                      </div>
+                                    </div>
+                                    
                                 </div>
-                            <% end %>
+
                         <% end %>
                     </div>
                 </div>
             </div>
-
-        
+            
             <div class="col-md-6 claimed">
                 <div class="col-md-12">
-                    <h1 class="tasks">Claimed Tasks</h1>
+                    <h1 class="tasks">Pending Posted Tasks</h1>
                 </div>
     
                 <div class="col-md-12 ctasks">
                     <div class="panel-group">
                     
-                        <% current_user.claims.each do |task| %>
-                            <% unless task.completer_id %>
+                        <% current_user.posts.each do |task| %>
+                            <% if task.completer_id %>
                                 <!-- THE ID OF THIS CLAIMED TASK IS <%= task.id %> -->
                                 <div class="panel panel-primary" style="margin-top: 20px">
                                     <div class="panel-heading">
@@ -89,15 +81,12 @@
                                         </p>
                                         
                                         <div class="btn-group btn-group-justified" role="group">
-                                            <%= link_to [:cancel, task], :method => :put, class: "btn btn-warning", role: "button" do %>
-                                                <strong>Cancel</strong>
-                                            <% end %>
-                                            <%= link_to [:complete, task], :method => :post, class: "btn btn-success", role: "button" do %>
-                                                <strong>Complete!</strong>
+                                            <%= link_to [:confirm, task], :method => :post, class: "btn btn-success", role: "button" do %>
+                                                <strong>Confirm!</strong>
                                             <% end %>
                                         </div>
                                     </div>
-                                    <div class="panel-footer">by <em><%= task.owner.email %></em> on <%= task.created_at.strftime("%m/%d/%Y at %I:%M%p") %></div>
+                                    <div class="panel-footer">Completed by <em><%= task.completer.email %></em></div>
                                 </div>
                             <% end %>
                         <% end %>
@@ -105,6 +94,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
     
@@ -129,7 +119,10 @@
             }
           ]);
             
-          <% @tasks.each do |task| %>
+          <% current_user.completes.each do |task| %>
+              handler.addMarker({"lat": <%= task.latitude %>, "lng": <%= task.longitude %>, "infowindow": "<%= task.name %>" })
+          <% end %>
+          <% current_user.posts.each do |task| %>
               handler.addMarker({"lat": <%= task.latitude %>, "lng": <%= task.longitude %>, "infowindow": "<%= task.name %>" })
           <% end %>
           handler.bounds.extendWith(markers);

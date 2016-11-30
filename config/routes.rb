@@ -5,10 +5,13 @@ Rails.application.routes.draw do
   get 'tasks/map', to: "tasks#map", as: "map_task"
   get 'tasks/new', to: "tasks#new", as: "new_task"
   get 'tasks/index', to: "tasks#index", as: "index_task"
+  get 'tasks/pending', to: "tasks#pending", as: "pending_task"
+  get 'tasks/my', to: "tasks#my", as: "my_task"
   get 'tasks/show'
   resources :tasks
   
   post 'tasks/:id/claim', to: "tasks#claim", as:"claim_task"
+  post 'tasks/:id/confirm', to: "tasks#confirm", as:"confirm_task"
   put 'tasks/:id/cancel', to: "tasks#cancel", as:"cancel_task"
   post 'tasks/:id/complete', to: "tasks#complete", as:"complete_task"
   post 'tasks/:id/destroy', to: "tasks#destroy", as:"destroy_task"
