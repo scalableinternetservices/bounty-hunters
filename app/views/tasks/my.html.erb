@@ -49,7 +49,7 @@
                                         <% end %>
                                     </div>
                                 </div>
-                                <div class="panel-footer">by <em><%= task.owner.email %></em> on <%= task.created_at.strftime("%m/%d/%Y at %I:%M%p") %></div>
+                                <div class="panel-footer">by <em><%= current_user.email %></em> on <%= task.created_at.strftime("%m/%d/%Y at %I:%M%p") %></div>
                             </div>
                         <% end %>
                             

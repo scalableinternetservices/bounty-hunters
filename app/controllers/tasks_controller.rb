@@ -24,9 +24,11 @@ class TasksController < ApplicationController
   
   def index
     if params[:search]
-      @tasks = Task.search(params[:search])
+      #eager loading
+      @tasks = Task.search(params[:search]).includes(:owner)
     else
-      @tasks = Task.all
+      #eager loading
+      @tasks = Task.all.includes(:owner)
     end
   end
 
