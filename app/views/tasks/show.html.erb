@@ -5,8 +5,23 @@
         </div>
         <ul class="list-group">
             <li class="list-group-item">
-                <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@task.latitude},#{@task.longitude}&markers=#{@task.latitude},#{@task.longitude}&zoom=12&size=800x400",
-                  class: 'img-responsive img-rounded center-block'%><br>
+                <div id="map" class="map"></div>
+                <script>
+                    handler = Gmaps.build('Google');
+                    handler.buildMap({ provider: {}, internal: {id: 'map'} }, function(){
+                      markers = handler.addMarkers([
+                        {
+                          "lat": <%= @task.latitude %>,
+                          "lng": <%= @task.longitude %>
+                        }
+                      ]);
+
+                      handler.bounds.extendWith(markers);
+                      handler.fitMapToBounds();
+                      handler.getMap().setZoom(13);
+                    });
+                    
+                </script>
                 Location: <%= @task.address %>
             </li>
         </ul>
