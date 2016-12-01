@@ -17,16 +17,16 @@ class TasksController < ApplicationController
     if @task.save
         redirect_to @task, alert: "Task created successfully."
     else
-        redirect_to new_user_path, alert: "Error creating task."
+        redirect_to new_task_path, alert: "Error creating task."
     end
   end
   
   
   def index
     if params[:search]
-      @tasks = Task.search(params[:search])
+      @tasks = Task.search(params[:search], params[:page])
     else
-      @tasks = Task.all
+      @tasks = Task.paginate(:page => params[:page], :per_page => 5)
     end
   end
 
@@ -48,7 +48,7 @@ class TasksController < ApplicationController
           user.update_attribute(:amount, price)
           redirect_to pending_task_path, alert: "Owner confirmed, and completer succesfully earned bounty. Task successfully destroyed."
         else
-          redirect_to @task, alert: "Error destroying task."
+          redirect_to main_app_path, alert: "Error destroying task."
         end
       else
         redirect_to pending_task_path, alert: "Task is not completed by the claimer yet."
@@ -63,10 +63,10 @@ class TasksController < ApplicationController
       if @task.destroy
         redirect_to main_app_path, alert: "Task successfully destroyed."
       else
-        redirect_to @task, alert: "Error destroying task."
+        redirect_to main_app_path, alert: "Error destroying task."
       end
     else
-      redirect_to @task, alert: "Could not destroy task."
+      redirect_to main_app_path, alert: "Could not destroy task."
     end
   end
   
@@ -77,10 +77,10 @@ class TasksController < ApplicationController
       if @task.save
         redirect_to main_app_path, alert: "Successfully claimed task!"
       else
-        redirect_to main_app, alert: "Error saving claim."
+        redirect_to main_app_path, alert: "Error saving claim."
       end
     else
-      redirect_to main_app, alert: "Error: task already claimed!"
+      redirect_to main_app_path, alert: "Error: task already claimed!"
     end
   end
   
@@ -91,7 +91,7 @@ class TasksController < ApplicationController
       if @task.save
         redirect_to pending_task_path, alert: "Successfully completed task! Waiting owner to confirm"
       else
-        redirect_to main_app, alert: "Error saving claim."
+        redirect_to main_app_path, alert: "Error saving claim."
       end
       # price = @task.price + current_user.amount
       # if @task.destroy

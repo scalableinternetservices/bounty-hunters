@@ -57,10 +57,14 @@
                                 </div>
                             <% end %>
                         <% end %>
+                        <br>
+                        <div class="digg_pagination page">
+                                <%= will_paginate @tasks %>
+                         </div>
                     </div>
                 </div>
             </div>
-
+            
         
             <div class="col-md-6 claimed">
                 <div class="col-md-12">

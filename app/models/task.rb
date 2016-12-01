@@ -8,8 +8,9 @@ class Task < ActiveRecord::Base
     validates :description, length: { in: 1..1000 }
     validates :price, numericality: { greater_than_or_equal_to: 0 }
     
-    def self.search(search)
-      where("tags LIKE ?", "%#{search}%") 
+    def self.search(search, page)
+        self.where("tags LIKE '%#{search}%'")
+        .paginate(:page => page, :per_page => 5).order('tags ASC')
     end
     
     # unsure of gmaps api if we ever add but something like this
