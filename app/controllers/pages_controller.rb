@@ -8,7 +8,7 @@ class PagesController < ApplicationController
     
     def mainpage
         if current_user
-            @tasks = Task.all
+            @tasks = Task.paginate(:page => params[:page], :per_page => 5)
         else
             redirect_to new_user_session_path, notice: 'Log in to see main application page.'
         end
